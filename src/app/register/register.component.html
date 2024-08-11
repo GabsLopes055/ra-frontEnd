@@ -1,0 +1,26 @@
+<main>
+  <div class="logo">
+     <div class="title">
+       <p>Lojas <strong>R&A</strong></p>
+       <p>Nacionais e Importados</p>
+       <div class="label">
+        <h3>Cadastre-se em nosso sistema e acompanhe.</h3>
+       </div>
+     </div>
+  </div>
+  <div class="content">
+    <div class="form">
+      <h1>Vamos Começar</h1>
+      <br>
+      <p>Registre-se</p>
+      <gbs-input [placeholder]="'Nome Completo'" [icon]="'person'" [control]="formLogin.controls.nomeCompleto" [type]="'text'"></gbs-input>
+      <gbs-input [placeholder]="'E-mail'" [icon]="'key'" [control]="formLogin.controls.email"[type]="'text'"></gbs-input>
+      <gbs-input [placeholder]="'Usuario'" [icon]="'key'" [control]="formLogin.controls.username"[type]="'text'"></gbs-input>
+      <gbs-input [placeholder]="'Senha'" [icon]="'key'" [control]="formLogin.controls.password"[type]="'password'"></gbs-input>
+      <gbs-button [label]="'Registrar-se'" [color]="'primary'"[fieldButton]="'field'" [icon]="'person_add'"></gbs-button>
+    </div>
+    <div class="footer">
+      <p>Já possui uma conta? &nbsp;<strong><a href="#">Acesse agora !</a></strong></p>
+    </div>
+  </div>
+</main>

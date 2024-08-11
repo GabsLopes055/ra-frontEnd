@@ -1,0 +1,32 @@
+@import "../../../assets/colors.scss";
+
+main {
+  .main-tabs {
+    width: 100%;
+
+    .tabs {
+      display: flex;
+      flex-direction: row;
+
+      .tab {
+        cursor: pointer;
+        height: 64px;
+        padding: 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        justify-content: center;
+        align-items: center;
+
+        .label {
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        &.selected {
+          border-bottom: solid 2px #f44336;
+        }
+      }
+    }
+  }
+}
