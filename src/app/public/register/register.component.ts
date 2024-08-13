@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { InputComponent } from '../../shared/input/input.component';
+import { InputComponent } from '../../../shared/input/input.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonComponent } from '../../shared/button/button.component';
+import { ButtonComponent } from '../../../shared/button/button.component';
 
 @Component({
   selector: 'app-register',

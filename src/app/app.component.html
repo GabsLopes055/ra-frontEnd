@@ -1,1 +1,13 @@
-<router-outlet></router-outlet>
+<main>
+  @if(this.menuLateral.length) {
+  <gbs-menu></gbs-menu>
+  }
+
+  <div>
+    @if(this.menuLateral.length) {
+      <gbs-navbar></gbs-navbar>
+    }
+    <router-outlet></router-outlet>
+  </div>
+
+</main>

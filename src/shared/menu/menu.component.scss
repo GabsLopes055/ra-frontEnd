@@ -1,0 +1,120 @@
+@import "../../assets/colors.scss";
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: $color-black;
+  transition: width .5s;
+  width: 240px;
+
+  .content {
+    width: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+
+    .logo {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0;
+      cursor: pointer;
+
+      span {
+        cursor: pointer;
+      }
+    }
+
+    .itens {
+      list-style: none;
+
+      li {
+        width: 200px;
+        border-radius: 10px;
+        margin-bottom: .3rem;
+        transition: all .5s;
+        align-items: center;
+
+        a {
+          height: 16px;
+          padding: 16px;
+          gap: 12px;
+
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          transition: all .5s;
+          color: #eee;
+
+          span {
+            width: 20px;
+            height: 20px;
+          }
+
+          .item-description {
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 24px;
+            letter-spacing: 0.5px;
+            text-align: left;
+          }
+
+          &:hover {
+            color: #eee !important;
+            background-color: #38040E;
+            border-radius: 10px;
+            transition: all .5s;
+          }
+        }
+
+        .selected {
+          background-color: $color-red;
+          border-radius: 10px;
+          color: #eee;
+        }
+      }
+    }
+  }
+
+  .item-help {
+
+    width: 200px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    transition: all .5s;
+
+    a {
+      height: 16px;
+      padding: 16px 24px 16px 16px;
+      gap: 12px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      cursor: pointer;
+
+      color: #eee;
+      transition: all .5s;
+
+      .item-description {
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+        text-align: left;
+      }
+
+      // &:hover {
+      //   color: $color-black;
+      // }
+    }
+
+    &:hover {
+      background-color: $color-red;
+    }
+  }
+}

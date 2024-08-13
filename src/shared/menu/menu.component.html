@@ -1,0 +1,35 @@
+<div class="menu">
+  <div class="content">
+
+    <div class="logo">
+    </div>
+
+
+    <ul class="itens">
+      @for(item of menu; track item){
+      <li class="item">
+        <a href="" [ngClass]="{selected: item.checked}" [routerLink]="item.route">
+          <span class="material-symbols-outlined">
+            {{item.icon}}
+          </span>
+
+          <div class="item-description">{{item.label}}</div>
+        </a>
+      </li>
+      }
+    </ul>
+  </div>
+
+
+
+  <div class="item-help">
+    <a [routerLink]="''">
+      <span class="material-symbols-outlined">
+        logout
+      </span>
+      <div class="item-description">Sair</div>
+    </a>
+  </div>
+
+
+</div>
