@@ -19,21 +19,24 @@
 
     .logo {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       padding: 20px 0;
       cursor: pointer;
 
-      span {
+      img {
+        width: 150px;
+        height: 150px;
         cursor: pointer;
       }
     }
 
     .itens {
+
       list-style: none;
 
       li {
         width: 200px;
-        border-radius: 10px;
+        border-radius: 50px;
         margin-bottom: .3rem;
         transition: all .5s;
         align-items: center;
@@ -42,7 +45,6 @@
           height: 16px;
           padding: 16px;
           gap: 12px;
-
           display: flex;
           align-items: center;
           text-decoration: none;
@@ -63,17 +65,21 @@
           }
 
           &:hover {
-            color: #eee !important;
-            background-color: #38040E;
-            border-radius: 10px;
-            transition: all .5s;
+            background-color: $color-gray-scale-60;
+            border-radius: 50px;
+            color: $color-yellow-secondary;
           }
         }
 
         .selected {
-          background-color: $color-red;
-          border-radius: 10px;
+          background-color: $color-primary;
+          border-radius: 50px;
           color: #eee;
+
+          &:hover {
+            background-color: $color-primary;
+            color: #eee;
+          }
         }
       }
     }
@@ -82,7 +88,7 @@
   .item-help {
 
     width: 200px;
-    border-radius: 10px;
+    border-radius: 50px;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
@@ -114,7 +120,7 @@
     }
 
     &:hover {
-      background-color: $color-red;
+      background-color: $color-gray-scale-60;
     }
   }
 }

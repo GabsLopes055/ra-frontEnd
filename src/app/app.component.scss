@@ -3,9 +3,12 @@
 main {
   display: flex;
   flex-direction: row;
+  background-color: $color-black;
   // gap: 20px;
 
   div {
+    border-radius: 32px 0 0 32px;
+    background-color: $color-brand-white;
     width: 100%;
   }
   // background-color: $color-black;

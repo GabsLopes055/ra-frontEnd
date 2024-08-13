@@ -1,6 +1,10 @@
+@import '../../.../../../../../assets/colors.scss';
 main {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  // background-color: aliceblue;
+  // gap: 24px;
+  height: 80vh;
+  margin: 0px 24px 0px 24px;
+  // padding: 24px;
+  // background-color: $color-gray-scale-60;
 }
