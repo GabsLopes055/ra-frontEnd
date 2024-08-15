@@ -114,13 +114,14 @@
         text-align: left;
       }
 
-      // &:hover {
-      //   color: $color-black;
-      // }
+      &:hover {
+        color: $color-yellow-secondary;
+      }
     }
 
     &:hover {
       background-color: $color-gray-scale-60;
+      color: $color-yellow;
     }
   }
 }

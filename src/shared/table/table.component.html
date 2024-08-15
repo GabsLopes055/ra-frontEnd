@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      @for(item of titulo; track item) {
+      <th>
+        <span>
+          {{item}}
+        </span>
+      </th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      @for(row of linha; track row){
+      <td>
+        <gbs-list [dados]="row"></gbs-list>
+      </td>
+      }
+    </tr>
+  </tbody>
+</table>
