@@ -10,8 +10,14 @@ import { usuario } from '../../app/interfaces/usuario.model';
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
-  titulo: string[] = ['Id', 'Nome', 'Usuario', 'Status', 'Permissão'];
-  @Input() linha: usuario[] = [];
+
+  @Input() headers!: any;
+  @Input() body: usuario[] = [];
+
+  constructor() {
+    console.log(this.headers)
+  }
+
 }
 
 
