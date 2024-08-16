@@ -1,3 +1,5 @@
+@import '../../assets/colors.scss';
+
 .table {
   width: 100%;
   border-collapse: separate;  // Necessário para permitir o espaçamento
@@ -8,7 +10,8 @@
 .table th {
   color: #000;
   font-family: 'Poppins';
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 900;
   width: 150px;
 }
 
@@ -19,10 +22,19 @@
   text-align: left;
 }
 
+.table > tbody > tr {
+  &:hover {
+    // color: $color-yellow;
+    // cursor: pointer;
+  }
+}
+
 .table td {
-  background-color: #F3F4F3;
   padding: 24px;
   text-align: left;
+  background-color: #F3F4F3;
+
+
 
   &:first-child {
     border-top-left-radius: 24px;
@@ -32,5 +44,9 @@
   &:last-child {
     border-bottom-right-radius: 24px;
     border-top-right-radius: 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    height: 100%;
   }
 }

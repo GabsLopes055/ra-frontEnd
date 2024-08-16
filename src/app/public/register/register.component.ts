@@ -6,6 +6,7 @@ import { ButtonComponent } from '../../../shared/button/button.component';
 import { ToastrService } from 'ngx-toastr';
 import { usuarioRequest } from '../../interfaces/usuario.model';
 import { Router } from '@angular/router';
+import { UserService } from '../../../shared/user/user.service';
 
 @Component({
   selector: 'app-register',
@@ -28,10 +29,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-    private readonly toastr: ToastrService,
     private readonly serviceAuthentication: AuthenticationService,
-    private readonly router: Router
-  ){}
+    private readonly router: Router,
+    private readonly toast: ToastrService,
+    private readonly userService: UserService
+  ){
+    this.userService.clearSession();
+  }
 
   ngOnDestroy(): void {
 
@@ -45,11 +49,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this.serviceAuthentication.register(this.formLogin.value as usuarioRequest).subscribe({
         next: () => {
           this.router.navigate(['']);
-          this.toastr.warning('Entre em contato com o administrador para aprovar sua entrada', 'Usuário Cadastrado. ');
+        }, error: (error) => {
+          this.toast.error(error.error.mensagem, error.error.error);
         }
       })
     } else {
-      this.toastr.warning('Preencha o formulario corretamente!', 'Atenção !');
+      this.toast.warning('Preencha o formulario corretamente!', 'Atenção !');
     }
   }
 

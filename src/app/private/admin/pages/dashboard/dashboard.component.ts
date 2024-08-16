@@ -17,10 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DashboardComponent {
 
-  tabs: Tab[] = [
-    { icon: 'person', label: 'Usuarios', selected: true, value: 'usuarios' },
-    { icon: 'person', label: 'Usuarios', selected: false, value: 'usuarios' },
-  ];
+
 
   constructor(
     private readonly menuService: MenuService,

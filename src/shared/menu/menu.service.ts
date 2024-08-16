@@ -39,6 +39,18 @@ export class MenuService {
         checked: false,
       },
       {
+        icon: 'storefront',
+        label: 'Vendas',
+        route: 'dashboard/vendas',
+        checked: false,
+      },
+      {
+        icon: 'inventory_2',
+        label: 'Produtos',
+        route: 'dashboard/produtos',
+        checked: false,
+      },
+      {
         icon: 'person',
         label: 'Usuarios',
         route: 'dashboard/usuarios',

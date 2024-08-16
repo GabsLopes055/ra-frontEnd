@@ -31,15 +31,16 @@ export class ButtonComponent {
 
 
   colors: Colors = {
-    primary: '#f44336',
+    primary: '#FF3131',
     secundary: '#0C0C0C',
     warning: '',
     success: '',
-    error: '#EE0D43'
+    error: '#EE0D43',
+    yellow: '#FFAC33'
   }
 
 }
-type TypeColors = 'primary' | 'secundary' | 'warning' | 'success' | 'error';
+type TypeColors = 'primary' | 'secundary' | 'warning' | 'success' | 'error' | 'yellow';
 
 type Colors = {
   [key in TypeColors]: string;

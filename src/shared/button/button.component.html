@@ -1,10 +1,9 @@
 <button
   [type]="type" [style.opacity]="disabled ? 0.5 : 1"
-  [style.background]="fieldButton === 'field' ? colors[color] : hover ? '#FFC2C2' : '#fff'" [style.width]="'100%'"
+  [style.background]="fieldButton === 'field' ? colors[color] : hover ? color : '#fff'" [style.width]="'100%'"
   [style.padding]=" size == 'middle' ? '1rem' : '12px'"
   [style.border]="(fieldButton == 'outline' && border) ? 'solid 1px #f44336' : 'none'"
   [style.color]="fieldButton == 'outline' ? '#000' : '#fff'"
-  [style.color]=""
   [style.border-radius]="'50px'"
   [style.font-weight]="'bold'"
   [style.display]="'flex'"

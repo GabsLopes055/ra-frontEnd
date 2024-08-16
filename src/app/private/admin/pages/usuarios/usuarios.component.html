@@ -1,4 +1,13 @@
 <main>
-  <gbs-table [headers]="headers" [body]="body">
-  </gbs-table>
+  <gbs-tabs [tabs]="tabs" (change)="retornarValorTab($event)"></gbs-tabs>
+
+  @switch (tabSelecionada) {
+    @case ('listar-usuarios') {
+      <app-listar-usuarios></app-listar-usuarios>
+    }
+    @case('cadastrar-usuarios') {
+      <app-cadastrar-usuarios></app-cadastrar-usuarios>
+    }
+  }
+
 </main>

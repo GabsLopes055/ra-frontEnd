@@ -81,9 +81,12 @@ main {
       flex-direction: row;
       justify-content: center;
       align-items: center;
+      width: 300px;
+      text-align: center;
+      color: $color-gray-scale-60;
 
       a {
-        color: #000;
+        color: $color-black;
         cursor: pointer;
       }
     }

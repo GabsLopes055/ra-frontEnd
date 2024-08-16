@@ -14,19 +14,23 @@
     @for(row of body; track row){
     <tr>
       <td>
-        <span>{{row.id}}</span>
+        <span>{{row.userId}}</span>
       </td>
       <td>
-        <span>{{row.nome}}</span>
+        <span>{{row.nomeCompleto}}</span>
       </td>
       <td>
         <span>{{row.email}}</span>
       </td>
       <td>
-        <span>{{row.status}}</span>
+        <span>{{row.statusUsuario}}</span>
       </td>
       <td>
-        <span>{{row.tipo}}</span>
+        <span>{{row.permissao}}</span>
+      </td>
+      <td class="butons">
+        <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'" [size]="'small'"></gbs-button>
+        <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'" [size]="'small'"></gbs-button>
       </td>
     </tr>
     }

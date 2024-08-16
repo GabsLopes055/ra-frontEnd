@@ -1,9 +1,9 @@
 export interface usuario {
-  id: string;
-  nome: string;
+  userId: string;
+  nomeCompleto: string;
   email: string;
-  status: string;
-  tipo: string;
+  statusUsuario: string;
+  permissao: string;
 }
 
 export interface usuarioRequest {
