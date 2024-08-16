@@ -1,7 +1,11 @@
+import { AuthenticationService } from './../authentication.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { InputComponent } from '../../../shared/input/input.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/button/button.component';
+import { ToastrService } from 'ngx-toastr';
+import { usuarioRequest } from '../../interfaces/usuario.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,20 +22,35 @@ import { ButtonComponent } from '../../../shared/button/button.component';
 export class RegisterComponent implements OnInit, OnDestroy {
 
   formLogin = new FormGroup({
-    username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     nomeCompleto: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-
   });
 
-  constructor(){}
+  constructor(
+    private readonly toastr: ToastrService,
+    private readonly serviceAuthentication: AuthenticationService,
+    private readonly router: Router
+  ){}
 
   ngOnDestroy(): void {
 
   }
   ngOnInit(): void {
 
+  }
+
+  register() {
+    if(this.formLogin.valid) {
+      this.serviceAuthentication.register(this.formLogin.value as usuarioRequest).subscribe({
+        next: () => {
+          this.router.navigate(['']);
+          this.toastr.warning('Entre em contato com o administrador para aprovar sua entrada', 'Usuário Cadastrado. ');
+        }
+      })
+    } else {
+      this.toastr.warning('Preencha o formulario corretamente!', 'Atenção !');
+    }
   }
 
 }

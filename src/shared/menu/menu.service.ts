@@ -11,7 +11,8 @@ export class MenuService {
     this.criarMenu();
   }
 
-  setMenu(menu?: Menu) {
+  setMenu(menu: Menu) {
+
     let lista: Menu[] = [];
 
     this._menu.subscribe((menu) => (lista = menu));
@@ -34,13 +35,13 @@ export class MenuService {
       {
         icon: 'dashboard',
         label: 'Dashboard',
-        route: '/admin/dashboard',
+        route: 'dashboard',
         checked: false,
       },
       {
         icon: 'person',
         label: 'Usuarios',
-        route: '/admin/dashboard',
+        route: 'dashboard/usuarios',
         checked: false,
       },
     ]);

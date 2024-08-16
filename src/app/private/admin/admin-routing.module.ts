@@ -8,7 +8,14 @@ const routes: Routes = [
       import('../admin/pages/dashboard/dashboard.component').then(
         (dashboard) => dashboard.DashboardComponent
       ),
-  }
+  },
+  {
+    path: 'usuarios',
+    loadComponent: () =>
+      import('../admin/pages/usuarios/usuarios.component').then(
+        (usuarios) => usuarios.UsuariosComponent
+      ),
+  },
 ];
 
 @NgModule({

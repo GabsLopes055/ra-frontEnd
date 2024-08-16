@@ -5,3 +5,9 @@ export interface usuario {
   status: string;
   tipo: string;
 }
+
+export interface usuarioRequest {
+  nomeCompleto: string;
+  email: string;
+  password: string;
+}
