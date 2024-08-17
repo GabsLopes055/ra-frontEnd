@@ -1,8 +1,11 @@
 <button
-[style.border]="border ? '1px solid #000' : ''"
-[style.background]="color"
+[style.border]="active ? 'none' : '1px solid #000'"
+[style.background]="active ? '#FF3131' : 'white'"
+[style.color]="active ? 'white' : '#000'"
+[style.cursor]="'pointer'"
+
 >
 {{label}}
-<span class="material-symbols-outlined color-icon">
+<span class="material-symbols-outlined">
   {{icon}}
 </span></button>

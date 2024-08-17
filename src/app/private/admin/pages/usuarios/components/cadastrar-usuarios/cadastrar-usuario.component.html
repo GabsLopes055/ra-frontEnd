@@ -1,1 +1,12 @@
-<p>cadastrar-usuario works!</p>
+<main>
+  <form action="" method="post">
+    <gbs-input [placeholder]="'Nome Completo'" [icon]="'person'" [control]="formCadastrar.controls.nomeCompleto" [type]="'text'"></gbs-input>
+      <gbs-input [placeholder]="'E-mail'" [icon]="'mail'" [control]="formCadastrar.controls.email"[type]="'text'"></gbs-input>
+      <gbs-input [placeholder]="'Status Usuario'" [icon]="'lock_open_right'" [control]="formCadastrar.controls.statusUsuario"[type]="'text'"></gbs-input>
+      <gbs-input [placeholder]="'Permissão'" [icon]="'fingerprint'" [control]="formCadastrar.controls.permissao"[type]="'text'"></gbs-input>
+      <gbs-input [placeholder]="'Senha'" [icon]="'key'" [control]="formCadastrar.controls.password"[type]="'password'"></gbs-input>
+  </form>
+  <div class="actions">
+    <gbs-button [disabled]="!this.formCadastrar.valid" [label]="'Cadastrar'" [color]="'secundary'" [icon]="'add'" (click)="cadastra()"></gbs-button>
+  </div>
+</main>

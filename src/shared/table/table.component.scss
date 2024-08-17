@@ -2,9 +2,11 @@
 
 .table {
   width: 100%;
-  border-collapse: separate;  // Necessário para permitir o espaçamento
-  border-spacing: 0 16px;  // 0 para colunas e 16px para linhas
-  margin: 24px 0px;
+  border-collapse: separate; // Necessário para permitir o espaçamento
+  border-spacing: 0 16px; // 0 para colunas e 16px para linhas
+  // margin: 24px 0px;
+  // height: 800px;
+  overflow-y: scroll;
 }
 
 .table th {
@@ -22,12 +24,6 @@
   text-align: left;
 }
 
-.table > tbody > tr {
-  &:hover {
-    // color: $color-yellow;
-    // cursor: pointer;
-  }
-}
 
 .table td {
   padding: 24px;

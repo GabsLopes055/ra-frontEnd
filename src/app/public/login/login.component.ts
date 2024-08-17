@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             } else if (error.error.status == '400') {
               this.toast.warning(error.error.mensagem, "Sua senha está incorreta");
             } else {
-              this.toast.error('Erro ao realizar login', 'Erro interno !');
+              this.toast.error('', 'Usuário não encontrado');
             }
           },
         });

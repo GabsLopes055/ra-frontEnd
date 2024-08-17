@@ -1,3 +1,6 @@
-<gbs-chips [label]="'Todos'" [icon]="'list'"></gbs-chips>
-<gbs-table [headers]="headers" [body]="body">
-</gbs-table>
+<div class="chips">
+  <gbs-chips [label]="'Todos'" [active]="activeChip === 'Todos'" [icon]="'list'" (click)="alterarChip('Todos')"></gbs-chips>
+  <gbs-chips [label]="'Ativos'" [active]="activeChip === 'Ativos'" [icon]="'task_alt'" (click)="alterarChip('Ativos')"></gbs-chips>
+  <gbs-chips [label]="'Inativos'" [active]="activeChip === 'Inativos'" [icon]="'person_off'" (click)="alterarChip('Inativos')"></gbs-chips>
+</div>
+<gbs-table [headers]="headers" [body]="body"></gbs-table>
