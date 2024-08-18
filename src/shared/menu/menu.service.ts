@@ -45,9 +45,15 @@ export class MenuService {
         checked: false,
       },
       {
-        icon: 'inventory_2',
+        icon: 'production_quantity_limits',
         label: 'Produtos',
         route: 'dashboard/produtos',
+        checked: false,
+      },
+      {
+        icon: 'bar_chart',
+        label: 'Graficos',
+        route: 'dashboard/graficos',
         checked: false,
       },
       {

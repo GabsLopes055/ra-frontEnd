@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { ListComponent } from "./list/list.component";
 import { usuario } from '../../app/interfaces/usuario.model';
 import { ButtonComponent } from "../button/button.component";
+import { StatusComponent } from "../status/status.component";
 
 @Component({
   selector: 'gbs-table',
   standalone: true,
-  imports: [ListComponent, ButtonComponent],
+  imports: [ListComponent, ButtonComponent, StatusComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })

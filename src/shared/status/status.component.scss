@@ -1,0 +1,23 @@
+.status {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  .ativo {
+  background-color: #00c542;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  }
+
+  .inativo {
+    background-color: red;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    }
+
+
+}

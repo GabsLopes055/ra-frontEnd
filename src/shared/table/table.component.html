@@ -23,7 +23,9 @@
         <span>{{row.email}}</span>
       </td>
       <td>
-        <span>{{row.statusUsuario}}</span>
+        <span>
+          <gbs-status [status]="row.statusUsuario"></gbs-status>
+        </span>
       </td>
       <td>
         <span>{{row.permissao}}</span>
