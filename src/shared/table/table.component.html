@@ -28,8 +28,9 @@
         </span>
       </td>
       <td>
-        <span>{{row.permissao}}</span>
+        <span>{{ retornarPermissao(row.permissao) }}</span>
       </td>
+
       <td class="butons">
         <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'"
           [size]="'small'"></gbs-button>

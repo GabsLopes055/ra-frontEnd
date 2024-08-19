@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ListComponent } from "./list/list.component";
-import { usuario } from '../../app/interfaces/usuario.model';
-import { ButtonComponent } from "../button/button.component";
-import { StatusComponent } from "../status/status.component";
+import { ListComponent } from './list/list.component';
+import { Role, usuario } from '../../app/interfaces/usuario.model';
+import { ButtonComponent } from '../button/button.component';
+import { StatusComponent } from '../status/status.component';
 
 @Component({
   selector: 'gbs-table',
@@ -12,14 +12,21 @@ import { StatusComponent } from "../status/status.component";
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
-
   @Input() headers!: any;
   @Input() body: usuario[] = [];
 
-  constructor() {
-    // console.log(this.headers)
+  retornarPermissao(role: string): string {
+    switch (role) {
+      case 'ADMIN':
+        return 'Administrador';
+      case 'MANAGER':
+        return 'Gerente';
+      case 'SUPPORT':
+        return 'Suporte';
+      case 'USER':
+        return 'Usuário';
+      default:
+        return '';
+    }
   }
-
 }
-
-

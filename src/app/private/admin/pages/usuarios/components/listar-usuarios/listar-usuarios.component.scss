@@ -1,6 +1,22 @@
-.chips {
+main {
   display: flex;
-  flex-direction: row;
-  gap: 24px;
-  align-content: center;
+  flex-direction: column;
+
+  .chips {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-content: center;
+  }
+
+  gbs-table {
+    max-height: 550px;
+  }
+
+  .paginator {
+    padding: 24px 0px;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+  }
 }

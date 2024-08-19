@@ -1,8 +1,9 @@
 <div class="status">
 
-  @if(status === statusCircle.ATIVO) {
-    {{status}}
+  @if(status === 'ATIVO') {
+    <span class="ativo"></span>
+  } @else {
+    <span class="inativo"></span>
   }
-  <span class="ativo"></span>
   <span>{{status}}</span>
 </div>

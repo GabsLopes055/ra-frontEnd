@@ -10,11 +10,12 @@ import { UsuariosService } from './usuarios.service';
 import { Tab, TabsComponent } from '../../../../../shared/tabs/tabs.component';
 import { ListarUsuariosComponent } from "./components/listar-usuarios/listar-usuarios.component";
 import { CadastrarUsuarioComponent } from "./components/cadastrar-usuarios/cadastrar-usuario.component";
+import { PaginatorComponent } from "../../../../../shared/paginator/paginator.component";
 
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [TableComponent, TabsComponent, ListarUsuariosComponent, CadastrarUsuarioComponent],
+  imports: [TableComponent, TabsComponent, ListarUsuariosComponent, CadastrarUsuarioComponent, PaginatorComponent],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.scss',
 })

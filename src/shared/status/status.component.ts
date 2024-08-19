@@ -11,11 +11,7 @@ import { NgClass } from '@angular/common';
 })
 export class StatusComponent {
 
-  @Input() status!: StatusUser;
-
-  constructor() {
-    console.log(this.status)
-  }
+  @Input() status: string = '';
 
   protected readonly statusCircle = StatusUser
 }

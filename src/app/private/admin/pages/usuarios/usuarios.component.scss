@@ -2,8 +2,9 @@
 main {
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 87vh;
   margin: 0px 24px 0px 24px;
+  // gap: 34px;
 
   app-listar-usuarios {
     padding: 24px 0px;

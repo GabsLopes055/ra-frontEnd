@@ -1,0 +1,47 @@
+@import '../../assets/colors.scss';
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  padding-right: 50px;
+  gap: 14px;
+
+  .disabled {
+    display: none;
+  }
+
+  .pagina {
+    // background-color: aqua;
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    border: 100%;
+    background-color: $color-black;
+    color: $color-white;
+  }
+
+  span {
+    // min-width: 10px;
+    width: 30px;
+    border-radius: 50px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    // background-color: #eee;
+    border: none;
+    // color: $color-white;
+    cursor: pointer;
+    transition: all .5s;
+
+
+
+    &:hover {
+      transform: 1s;
+      background-color: $color-black;
+      color: $color-white
+    }
+  }
+}

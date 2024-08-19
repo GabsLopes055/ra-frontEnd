@@ -4,8 +4,8 @@ export interface usuario {
   userId: string;
   nomeCompleto: string;
   email: string;
-  statusUsuario: StatusUser;
-  permissao: Role;
+  statusUsuario: string;
+  permissao: string;
 }
 
 export interface usuarioRequest {

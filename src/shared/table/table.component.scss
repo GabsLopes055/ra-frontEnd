@@ -2,10 +2,8 @@
 
 .table {
   width: 100%;
-  border-collapse: separate; // Necessário para permitir o espaçamento
-  border-spacing: 0 16px; // 0 para colunas e 16px para linhas
-  // margin: 24px 0px;
-  // height: 800px;
+  border-collapse: separate;
+  border-spacing: 0 16px;
   overflow-y: scroll;
 }
 

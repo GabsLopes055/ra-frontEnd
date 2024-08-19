@@ -1,20 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscriber } from 'rxjs';
+
+import { ChipsComponent } from '../../../../../../../shared/chips/chips.component';
+import { PaginatorComponent } from '../../../../../../../shared/paginator/paginator.component';
+import { ListComponent } from '../../../../../../../shared/table/list/list.component';
 import { TableComponent } from '../../../../../../../shared/table/table.component';
+import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import {
   FiltroUsuarioRequest,
   StatusUser,
-  usuario,
 } from '../../../../../../interfaces/usuario.model';
-import { Subscriber } from 'rxjs';
 import { UsuariosService } from '../../usuarios.service';
-import { ToastService } from '../../../../../../../shared/toast/toast.service';
-import { ListComponent } from '../../../../../../../shared/table/list/list.component';
-import { ChipsComponent } from '../../../../../../../shared/chips/chips.component';
 
 @Component({
   selector: 'app-listar-usuarios',
   standalone: true,
-  imports: [TableComponent, ListComponent, ChipsComponent],
+  imports: [TableComponent, ListComponent, ChipsComponent, PaginatorComponent],
   templateUrl: './listar-usuarios.component.html',
   styleUrl: './listar-usuarios.component.scss',
 })
@@ -24,8 +25,9 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
   body: any[] = [];
   activeChip: string = 'Todos';
 
+  totalPages!: number;
   pagina: number = 0;
-  tamanhoPagina: number = 10;
+  tamanhoPagina: number = 3;
 
   filtroUsuarioRequest: FiltroUsuarioRequest = {
     pagina: this.pagina,
@@ -41,7 +43,6 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
   ) {}
 
   alterarChip(chip: string) {
-
     this.activeChip = chip;
 
     if (chip == 'Ativos') {
@@ -61,11 +62,18 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  passarPaginas(pagina: number) {
+    this.filtroUsuarioRequest.pagina = pagina;
+    console.log(pagina)
+    this.listarUsuarios();
+  }
+
   listarUsuarios() {
     this.subscription.add(
       this.usuarioService.listarTodos(this.filtroUsuarioRequest).subscribe({
         next: (usuarios) => {
           this.body = usuarios.content;
+          this.totalPages = usuarios.totalPages;
         },
         error: (error) => {
           console.log(error);
