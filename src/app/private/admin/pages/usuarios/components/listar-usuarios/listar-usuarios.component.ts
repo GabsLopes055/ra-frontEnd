@@ -11,23 +11,26 @@ import {
   StatusUser,
 } from '../../../../../../interfaces/usuario.model';
 import { UsuariosService } from '../../usuarios.service';
+import { optionsInput } from '../../../../../../../shared/input/input.component';
+import { StatusComponent } from "../../../../../../../shared/status/status.component";
+import { ButtonComponent } from "../../../../../../../shared/button/button.component";
 
 @Component({
   selector: 'app-listar-usuarios',
   standalone: true,
-  imports: [TableComponent, ListComponent, ChipsComponent, PaginatorComponent],
+  imports: [TableComponent, ListComponent, ChipsComponent, PaginatorComponent, StatusComponent, ButtonComponent],
   templateUrl: './listar-usuarios.component.html',
   styleUrl: './listar-usuarios.component.scss',
 })
 export class ListarUsuariosComponent implements OnInit, OnDestroy {
   subscription = new Subscriber();
-  headers = ['ID', 'Nome', 'Email', 'Status', 'Tipo', 'Ações'];
+  headers = ['Nome', 'Email', 'Status', 'Tipo', 'Ações'];
   body: any[] = [];
   activeChip: string = 'Todos';
 
   totalPages!: number;
   pagina: number = 0;
-  tamanhoPagina: number = 3;
+  tamanhoPagina: number = 5;
 
   filtroUsuarioRequest: FiltroUsuarioRequest = {
     pagina: this.pagina,
@@ -37,6 +40,7 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
     email: null,
     role: null,
   };
+
   constructor(
     private readonly usuarioService: UsuariosService,
     private readonly toast: ToastService
@@ -64,7 +68,6 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
 
   passarPaginas(pagina: number) {
     this.filtroUsuarioRequest.pagina = pagina;
-    console.log(pagina)
     this.listarUsuarios();
   }
 
@@ -81,6 +84,21 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
         },
       })
     );
+  }
+
+  retornarPermissao(role: string): string {
+    switch (role) {
+      case 'ADMIN':
+        return 'Administrador';
+      case 'MANAGER':
+        return 'Gerente';
+      case 'SUPPORT':
+        return 'Suporte';
+      case 'USER':
+        return 'Usuário';
+      default:
+        return '';
+    }
   }
 
   // protected readonly statusUsuario = StatusUser

@@ -1,4 +1,4 @@
-import { FiltroUsuarioRequest, usuario } from './../../../../interfaces/usuario.model';
+import { FiltroUsuarioRequest, usuario, usuarioRequest } from './../../../../interfaces/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -14,6 +14,10 @@ export class UsuariosService {
   constructor(private readonly http: HttpClient) { }
 
   public listarTodos(filtroUsuarioRequest: FiltroUsuarioRequest) : Observable<EntityPaginated<usuario[]>> {
-    return this.http.post<EntityPaginated<usuario[]>>(`${URL}/usuarios/listar-filtros`, filtroUsuarioRequest)
+    return this.http.post<EntityPaginated<usuario[]>>(`${URL}/usuarios/listar-filtros`, filtroUsuarioRequest);
+  }
+
+  public cadastrar(usuarioRequest: usuarioRequest) : Observable<usuario> {
+    return this.http.post<usuario>(`${URL}/usuarios/cadastrar`, usuarioRequest);
   }
 }

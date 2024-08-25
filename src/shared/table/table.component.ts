@@ -13,20 +13,5 @@ import { StatusComponent } from '../status/status.component';
 })
 export class TableComponent {
   @Input() headers!: any;
-  @Input() body: usuario[] = [];
-
-  retornarPermissao(role: string): string {
-    switch (role) {
-      case 'ADMIN':
-        return 'Administrador';
-      case 'MANAGER':
-        return 'Gerente';
-      case 'SUPPORT':
-        return 'Suporte';
-      case 'USER':
-        return 'Usuário';
-      default:
-        return '';
-    }
-  }
+  @Input() body: any[] = [];
 }

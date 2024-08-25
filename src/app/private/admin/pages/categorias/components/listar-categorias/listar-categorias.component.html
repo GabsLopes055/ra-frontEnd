@@ -1,0 +1,28 @@
+<main>
+  <gbs-table [headers]="headers">
+    @for (row of categorias; track row) {
+      <tr>
+        <!-- <td>
+          <span>{{row.idCategoria}}</span>
+        </td> -->
+        <td>
+          <span>{{row.nomeCategoria}}</span>
+        </td>
+        <td>
+          <span></span>
+        </td>
+        <td class="butons">
+          <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'"
+            [size]="'small'"></gbs-button>
+          <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
+            [size]="'small'"></gbs-button>
+          <gbs-button [border]="false" [color]="'secundary'" [fieldButton]="'field'" [icon]="' production_quantity_limits '"
+            [size]="'small'"></gbs-button>
+        </td>
+      </tr>
+    }
+  </gbs-table>
+  <div class="paginator">
+    <gbs-paginator></gbs-paginator>
+  </div>
+</main>

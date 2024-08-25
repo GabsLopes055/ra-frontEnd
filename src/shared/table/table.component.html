@@ -11,33 +11,6 @@
     </tr>
   </thead>
   <tbody>
-    @for(row of body; track row){
-    <tr>
-      <td>
-        <span>{{row.userId}}</span>
-      </td>
-      <td>
-        <span>{{row.nomeCompleto}}</span>
-      </td>
-      <td>
-        <span>{{row.email}}</span>
-      </td>
-      <td>
-        <span>
-          <gbs-status [status]="row.statusUsuario"></gbs-status>
-        </span>
-      </td>
-      <td>
-        <span>{{ retornarPermissao(row.permissao) }}</span>
-      </td>
-
-      <td class="butons">
-        <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'"
-          [size]="'small'"></gbs-button>
-        <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
-          [size]="'small'"></gbs-button>
-      </td>
-    </tr>
-    }
+    <ng-content></ng-content>
   </tbody>
 </table>

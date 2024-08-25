@@ -1,5 +1,19 @@
 <div class="input" [style.border-color]="control.value ? '#F44336' : '#000'">
-  <input [type]="type" [placeholder]="placeholder" [formControl]="control">
+
+  @if (type === 'select') {
+
+  <select name="" id="">
+
+    @for(option of options; track option) {
+    <option value="{{option.value}}" >{{option.label}}</option>
+    }
+
+  </select>
+
+  } @else {
+    <input [type]="type" [placeholder]="placeholder" [formControl]="control">
+  }
+
   <span class="material-symbols-outlined color-icon">
     {{icon}}
   </span>

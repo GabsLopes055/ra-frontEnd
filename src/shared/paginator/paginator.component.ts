@@ -48,9 +48,6 @@ export class PaginatorComponent implements OnChanges {
   }
 
   goToPage(page: number): void {
-    if (page !== this.currentPage) {
-      this.currentPage = page;
-      this.change.emit(this.currentPage);
-    }
+      this.change.emit(page);
   }
 }

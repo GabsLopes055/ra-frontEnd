@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivateFn } from '@angular/router';
 import { guardRouterGuard } from '../../guard-router.guard';
 
 const routes: Routes = [
@@ -17,6 +17,22 @@ const routes: Routes = [
     loadComponent: () =>
       import('../admin/pages/usuarios/usuarios.component').then(
         (usuarios) => usuarios.UsuariosComponent
+      ),
+  },
+  {
+    path: 'produtos',
+    canActivate: [guardRouterGuard],
+    loadComponent: () =>
+      import('../admin/pages/produtos/produtos.component').then(
+        (produtos) => produtos.ProdutosComponent
+      ),
+  },
+  {
+    path: 'categorias',
+    canActivate: [guardRouterGuard],
+    loadComponent: () =>
+      import('../admin/pages/categorias/categorias.component').then(
+        (categorias) => categorias.CategoriasComponent
       ),
   },
 ];

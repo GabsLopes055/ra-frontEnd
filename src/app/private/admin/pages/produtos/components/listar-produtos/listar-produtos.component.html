@@ -1,0 +1,41 @@
+<main>
+  <div class="chips">
+    <gbs-chips [label]="'Bolsas Masculinas'" [active]="activeChip === ''" [icon]="'work'" (click)="alterarChip('')"></gbs-chips>
+    <gbs-chips [label]="'Bolsas Femininas'" [active]="activeChip === ''" [icon]="'shopping_bag'" (click)="alterarChip('')"></gbs-chips>
+    <gbs-chips [label]="'Malas'" [active]="activeChip === ''" [icon]="'travel_luggage_and_bags'" (click)="alterarChip('')"></gbs-chips>
+    <gbs-chips [label]="'Carteiras'" [active]="activeChip === ''" [icon]="'summarize'" (click)="alterarChip('')"></gbs-chips>
+  </div>
+  <gbs-table [headers]="headers">
+    @for (row of body; track row) {
+      <tr>
+        <!-- <td>
+          <span></span>
+        </td> -->
+        <td>
+          <span>{{row.nomeProduto}}</span>
+        </td>
+        <td>
+          <span>{{row.precoVenda}}</span>
+        </td>
+        <td>
+          <span>{{row.precoCompra}}</span>
+        </td>
+        <td>
+          <span>{{row.quantidade}}</span>
+        </td>
+        <td>
+          <span>{{row.categoria.nomeCategoria}}</span>
+        </td>
+        <td class="butons">
+          <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'"
+            [size]="'small'"></gbs-button>
+          <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
+            [size]="'small'"></gbs-button>
+        </td>
+      </tr>
+    }
+  </gbs-table>
+  <div class="paginator">
+    <gbs-paginator [totalPages]="totalPages" (change)="passarPaginas($event)"></gbs-paginator>
+  </div>
+</main>

@@ -1,23 +1,18 @@
 <div class="buttons">
 
+  @if(totalPages > 0) {
   <div>
     <span (click)="anterior()" [class.disabled]="(this.currentPage - 1) < 0">
       <span class="material-symbols-outlined anterior">chevron_left</span>
     </span>
   </div>
 
-  @if(totalPages > 0) {
+  <span class="pagina">{{this.currentPage + 1}}</span>
 
-  <span class="pagina" (click)="goToPage(this.currentPage)">{{this.currentPage + 1}}</span>
-
-  @if((this.currentPage + 1) < totalPages) { <span class="pagina" (click)="goToPage(this.currentPage)">
-    {{this.currentPage + 2}}</span>
-    }
-    }
-
-    <div>
-      <span (click)="proximo()" [class.disabled]="(this.currentPage + 2) > this.totalPages">
-        <span class="material-symbols-outlined proximo">chevron_right</span>
-      </span>
-    </div>
+  <div>
+    <span (click)="proximo()" [class.disabled]="(this.currentPage + 2) > this.totalPages">
+      <span class="material-symbols-outlined proximo">chevron_right</span>
+    </span>
+  </div>
+  }
 </div>

@@ -51,6 +51,12 @@ export class MenuService {
         checked: false,
       },
       {
+        icon: 'category',
+        label: 'Categorias',
+        route: 'dashboard/categorias',
+        checked: false,
+      },
+      {
         icon: 'bar_chart',
         label: 'Graficos',
         route: 'dashboard/graficos',
