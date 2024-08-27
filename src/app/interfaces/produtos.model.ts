@@ -1,4 +1,5 @@
 import { categoria } from "./categoria.model";
+import { FiltroDeBusca } from "./paginated.model";
 
 export interface produtos extends categoria {
   idProduto: string,
@@ -7,4 +8,10 @@ export interface produtos extends categoria {
   precoCompra: number,
   quantidade: number,
   categoria: categoria
+}
+
+export interface filtroDeBuscaProduto {
+  tipoProduto: string | null,
+  pagina: number,
+  tamanhoPagina: number
 }

@@ -19,13 +19,13 @@
             <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
             [size]="'small'"></gbs-button>
             <gbs-button [border]="false" [color]="'secundary'" [fieldButton]="'field'" [icon]="' production_quantity_limits '"
-            [size]="'small'"></gbs-button>
+            [size]="'small'" (click)="listarProdutosDestaCategoria(row.idCategoria)"></gbs-button>
           </td>
         </tr>
       }
     </gbs-table>
     <div class="paginator">
-      <gbs-paginator></gbs-paginator>
+      <gbs-paginator [totalPages]="totalPages" (change)="passarPaginas($event)"></gbs-paginator>
     </div>
   } @else {
     <div class="vazio">

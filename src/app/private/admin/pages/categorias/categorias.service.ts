@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { categoria } from '../../../../interfaces/categoria.model';
+import { EntityPaginated, FiltroDeBusca } from '../../../../interfaces/paginated.model';
 
 const URL = environment.base_url;
 
@@ -11,11 +12,13 @@ const URL = environment.base_url;
 })
 export class CategoriasService {
 
+  listarProdutosDaCategoria = new BehaviorSubject<string | null>(null);
+
   constructor(
     private readonly http: HttpClient
   ) { }
 
-  public listarCategorias() : Observable<categoria[]> {
-    return this.http.get<categoria[]>(`${URL}/categoriasBolsas/listarTodasCategorias`);
+  public listarCategorias(filtro: FiltroDeBusca) : Observable<EntityPaginated<categoria[]>> {
+    return this.http.post<EntityPaginated<categoria[]>>(`${URL}/categoriasBolsas/listarTodasCategorias`, filtro);
   }
 }

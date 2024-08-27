@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { produtos } from '../../../../interfaces/produtos.model';
+import { filtroDeBuscaProduto, produtos } from '../../../../interfaces/produtos.model';
+import { EntityPaginated } from '../../../../interfaces/paginated.model';
 
 const URL = environment.base_url;
 
@@ -15,8 +16,8 @@ export class ProdutosService {
     private readonly http: HttpClient
   ) { }
 
-  public listarProdutos() : Observable<produtos[]> {
-    return this.http.get<produtos[]>(`${URL}/produtos/listarTodosProdutos`)
+  public listarProdutos(filtro: filtroDeBuscaProduto) : Observable<EntityPaginated<produtos[]>> {
+    return this.http.post<EntityPaginated<produtos[]>>(`${URL}/produtos/listarTodosProdutos`, filtro)
   }
 
 }

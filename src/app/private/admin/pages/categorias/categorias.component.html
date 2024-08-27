@@ -3,7 +3,11 @@
 
   @switch (tabSelecionada) {
     @case ("listar-categorias") {
-      <app-listar-categorias></app-listar-categorias>
+      @if(mostrarProdutosDaCategoria) {
+        <app-produtos-categoria [idCategoria]="this.idCategoria"></app-produtos-categoria>
+      } @else {
+        <app-listar-categorias></app-listar-categorias>
+      }
     }
     @case ("cadastrar-categoria") {
       <app-cadastrar-categoria></app-cadastrar-categoria>
