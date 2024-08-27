@@ -10,3 +10,7 @@ export interface categoriaComProdutos extends produtos {
   nomeCategoria: string;
   produtoResponses: produtos
 }
+
+export interface categoriaRequest {
+  nomeCategoria: string;
+}
