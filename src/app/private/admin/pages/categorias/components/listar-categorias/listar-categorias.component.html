@@ -17,7 +17,7 @@
             <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'"
             [size]="'small'"></gbs-button>
             <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
-            [size]="'small'"></gbs-button>
+            [size]="'small'" (click)="deletarCategoria(row.idCategoria)"></gbs-button>
             <gbs-button [border]="false" [color]="'secundary'" [fieldButton]="'field'" [icon]="' production_quantity_limits '"
             [size]="'small'" (click)="listarProdutosDestaCategoria(row.idCategoria)"></gbs-button>
           </td>

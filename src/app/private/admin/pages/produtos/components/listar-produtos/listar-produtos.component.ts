@@ -11,6 +11,8 @@ import { ButtonComponent } from '../../../../../../../shared/button/button.compo
 import { ChipsComponent } from '../../../../../../../shared/chips/chips.component';
 import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import { FiltroDeBusca } from '../../../../../../interfaces/paginated.model';
+import { Overlay } from '@angular/cdk/overlay';
+import { OverlayRef } from 'ngx-toastr';
 
 @Component({
   selector: 'app-listar-produtos',
@@ -19,7 +21,7 @@ import { FiltroDeBusca } from '../../../../../../interfaces/paginated.model';
     TableComponent,
     PaginatorComponent,
     ButtonComponent,
-    ChipsComponent,
+    ChipsComponent
   ],
   templateUrl: './listar-produtos.component.html',
   styleUrl: './listar-produtos.component.scss',

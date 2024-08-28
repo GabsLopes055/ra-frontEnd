@@ -1,12 +1,14 @@
-import { categoria } from './../../../../../../interfaces/categoria.model';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscriber } from 'rxjs';
-import { ToastService } from '../../../../../../../shared/toast/toast.service';
-import { CategoriasService } from '../../categorias.service';
-import { TableComponent } from '../../../../../../../shared/table/table.component';
 import { ButtonComponent } from '../../../../../../../shared/button/button.component';
+import { ModalComponent } from '../../../../../../../shared/modal-excluir/modal.component';
 import { PaginatorComponent } from '../../../../../../../shared/paginator/paginator.component';
+import { TableComponent } from '../../../../../../../shared/table/table.component';
+import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import { FiltroDeBusca } from '../../../../../../interfaces/paginated.model';
+import { CategoriasService } from '../../categorias.service';
 
 @Component({
   selector: 'app-listar-categorias',
@@ -25,12 +27,15 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
   pagina: number = 0;
   tamanhoPagina: number = 10;
 
+  overlayRef!: OverlayRef;
+
   filtro: FiltroDeBusca = {
     pagina: this.pagina,
     tamanhoPagina: this.tamanhoPagina,
   };
 
   constructor(
+    private readonly overlay: Overlay,
     private readonly categoriaService: CategoriasService,
     private readonly toastService: ToastService
   ) {}
@@ -54,9 +59,39 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
     this.categoriaService.listarProdutosDaCategoria.next(idCategoria);
   }
 
+  deletarCategoria(idCategoria: string) {
+
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true,
+      positionStrategy: this.overlay
+        .position()
+        .global()
+        .centerHorizontally()
+        .centerVertically(),
+      disposeOnNavigation: true,
+    });
+
+    const modal = new ComponentPortal<ModalComponent>(ModalComponent);
+
+    this.overlayRef.attach(modal);
+
+    this.overlayRef.keydownEvents().subscribe(() => this.closeModal());
+  }
+
+  closeModal() {
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+    }
+  }
+
   passarPaginas(pagina: number) {
     this.filtro.pagina = pagina;
     this.listarCategorias();
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEsc(event: KeyboardEvent) {
+    this.closeModal();
   }
 
   ngOnInit(): void {
