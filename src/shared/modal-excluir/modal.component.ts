@@ -10,17 +10,15 @@ import { ButtonComponent } from "../button/button.component";
 })
 export class ModalComponent {
 
-  @Input() title: string = 'Confirm';
-  @Input() message: string = 'Are you sure you want to proceed?';
-  @Output() confirm = new EventEmitter<void>();
-  @Output() cancel = new EventEmitter<void>();
+  @Output() confirmar = new EventEmitter<void>();
+  @Output() cancelar = new EventEmitter<void>();
 
 
-  onConfirm() {
-    this.confirm.emit();
+  onConfirmar() {
+    this.confirmar.emit();
   }
 
-  onCancel() {
-    this.cancel.emit();
+  onCancelar() {
+    this.cancelar.emit();
   }
 }

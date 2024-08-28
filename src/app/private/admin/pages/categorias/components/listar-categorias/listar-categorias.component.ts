@@ -59,7 +59,7 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
     this.categoriaService.listarProdutosDaCategoria.next(idCategoria);
   }
 
-  deletarCategoria(idCategoria: string) {
+  abrirModalExclusao(idCategoria: string) {
 
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
@@ -71,11 +71,26 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
       disposeOnNavigation: true,
     });
 
-    const modal = new ComponentPortal<ModalComponent>(ModalComponent);
+    const modalExclusao = new ComponentPortal<ModalComponent>(ModalComponent);
 
-    this.overlayRef.attach(modal);
+    const modalConfirmacao = this.overlayRef.attach(modalExclusao);
+
+    const modal = modalConfirmacao.instance as ModalComponent;
+
+    modal.cancelar.subscribe(() => {
+      this.closeModal();
+    });
+
+    modal.confirmar.subscribe(() => {
+      this.excluirCategoria(idCategoria);
+    });
+
 
     this.overlayRef.keydownEvents().subscribe(() => this.closeModal());
+  }
+
+  excluirCategoria(idCategoria: string) {
+    console.log(idCategoria)
   }
 
   closeModal() {
@@ -89,10 +104,10 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
     this.listarCategorias();
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEsc(event: KeyboardEvent) {
-    this.closeModal();
-  }
+  // @HostListener('document:keydown.escape', ['$event'])
+  // onEsc(event: KeyboardEvent) {
+  //   this.closeModal();
+  // }
 
   ngOnInit(): void {
     this.subscriber.add(this.listarCategorias());
