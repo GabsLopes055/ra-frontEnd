@@ -57,6 +57,7 @@ export class CategoriasComponent implements OnInit, OnDestroy{
   ];
 
   retornarValorTab(event: any) {
+    this.mostrarProdutosDaCategoria = false;
     this.categoriaService.listarProdutosDaCategoria.next(null);
     this.tabSelecionada = event
   }

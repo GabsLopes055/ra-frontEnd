@@ -51,7 +51,6 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
   }
 
   listarProdutosDestaCategoria(idCategoria: string) {
-    // console.log(idCategoria)
     this.categoriaService.listarProdutosDaCategoria.next(idCategoria);
   }
 

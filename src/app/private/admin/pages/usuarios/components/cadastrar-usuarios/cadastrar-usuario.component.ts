@@ -52,7 +52,6 @@ export class CadastrarUsuarioComponent implements OnInit, OnDestroy {
   }
 
   cadastra() {
-    console.log(this.formCadastrar.value)
     if(this.formCadastrar.valid) {
       this.usuarioService.cadastrar(this.formCadastrar.value as usuarioRequest).subscribe({
         next: () => {

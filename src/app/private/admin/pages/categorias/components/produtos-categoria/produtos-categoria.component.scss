@@ -1,4 +1,60 @@
+@import '../../../../../../../assets/colors.scss';
 main {
   display: flex;
   flex-direction: column;
+
+  .categoria {
+    padding: 24px;
+    background-color: $color-black;
+    color: $color-white;
+    border-radius: 10px;
+    // font-size: 18px;
+    font-weight: 600;
+  }
+
+  gbs-table {
+    max-height: 750px;
+  }
+
+  .paginator {
+    padding: 24px 0px;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+  }
+
+  td {
+    padding: 30px;
+    text-align: left;
+    background-color: #F3F4F3;
+
+    &:first-child {
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: 24px;
+      border-top-right-radius: 24px;
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      height: 100%;
+      justify-content: center;
+    }
+
+    // &:not(:first-child) {
+    //   padding-left: 40px;
+    // }
+    // &:not(:last-child) {
+    //   padding-left: 40px;
+    // }
+  }
+
+  .vazio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 }

@@ -8,7 +8,7 @@ export interface categoria {
 export interface categoriaComProdutos extends produtos {
   idCategoria: string;
   nomeCategoria: string;
-  produtoResponses: produtos
+  produtoResponses: produtos[]
 }
 
 export interface categoriaRequest {

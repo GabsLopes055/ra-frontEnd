@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { categoria, categoriaRequest } from '../../../../interfaces/categoria.model';
+import { categoria, categoriaComProdutos, categoriaRequest } from '../../../../interfaces/categoria.model';
 import { EntityPaginated, FiltroDeBusca } from '../../../../interfaces/paginated.model';
 
 const URL = environment.base_url;
@@ -23,6 +23,10 @@ export class CategoriasService {
   }
 
   public cadastrarCategoria(categoria: categoriaRequest): Observable<categoria> {
-    return this.http.post<categoria>(`${URL}/categoriasBolsas/cadastrarCategoria`, categoria)
+    return this.http.post<categoria>(`${URL}/categoriasBolsas/cadastrarCategoria`, categoria);
+  }
+
+  public listarProdutosPorCategoria(idCategoria: string) : Observable<categoriaComProdutos> {
+    return this.http.get<categoriaComProdutos>(`${URL}/categoriasBolsas/listarProdutosPorCategoria/${idCategoria}`);
   }
 }

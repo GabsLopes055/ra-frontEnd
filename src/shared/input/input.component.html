@@ -2,10 +2,10 @@
 
   @if (type === 'select') {
 
-  <select name="" id="">
+  <select [formControl]="control">
 
     @for(option of options; track option) {
-    <option value="{{option.value}}" >{{option.label}}</option>
+    <option value="{{option.value}}">{{option.label}}</option>
     }
 
   </select>

@@ -1,5 +1,4 @@
-import { categoria } from "./categoria.model";
-import { FiltroDeBusca } from "./paginated.model";
+import { categoria } from './categoria.model';
 
 export interface produtos extends categoria {
   idProduto: string,

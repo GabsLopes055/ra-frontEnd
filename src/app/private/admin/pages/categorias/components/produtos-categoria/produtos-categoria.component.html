@@ -1,3 +1,37 @@
 <main>
-{{idCategoria}}
+<div class="categoria">
+  {{categoriaComProdutos.nomeCategoria}}
+</div>
+
+@if (categoriaComProdutos.produtoResponses.length > 0) {
+  <gbs-table [headers]="headers">
+    @for (row of categoriaComProdutos.produtoResponses; track row) {
+      <tr>
+        <!-- <td>
+          <span></span>
+        </td> -->
+        <td>
+          <span>{{row.nomeProduto}}</span>
+        </td>
+        <td>
+          <span>{{row.precoVenda}}</span>
+        </td>
+        <td>
+          <span>{{row.precoCompra}}</span>
+        </td>
+        <td>
+          <span>{{row.quantidade}}</span>
+        </td>
+      </tr>
+    }
+  </gbs-table>
+  <div class="paginator">
+    <gbs-paginator></gbs-paginator>
+  </div>
+} @else {
+  <div class="vazio">
+    <img src="../../../../../../../assets/img/vazio.png" alt="" width="400" height="600">
+  </div>
+}
+
 </main>
