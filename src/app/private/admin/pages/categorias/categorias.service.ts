@@ -29,4 +29,8 @@ export class CategoriasService {
   public listarProdutosPorCategoria(idCategoria: string) : Observable<categoriaComProdutos> {
     return this.http.get<categoriaComProdutos>(`${URL}/categoriasBolsas/listarProdutosPorCategoria/${idCategoria}`);
   }
+
+  public excluirCategoria(idCategoria: string) : Observable<void> {
+    return this.http.delete<void>(`${URL}/categoriasBolsas/deletarCategoria/${idCategoria}`);
+  }
 }

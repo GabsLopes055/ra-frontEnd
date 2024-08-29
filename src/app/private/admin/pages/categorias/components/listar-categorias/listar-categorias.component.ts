@@ -90,12 +90,21 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
   }
 
   excluirCategoria(idCategoria: string) {
-    console.log(idCategoria)
+    this.categoriaService.excluirCategoria(idCategoria).subscribe({
+      next: (value) => {
+        this.toastService.success("Sucesso", "Categoria deletada");
+        this.closeModal()
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   closeModal() {
     if (this.overlayRef) {
       this.overlayRef.dispose();
+      this.listarCategorias();
     }
   }
 
