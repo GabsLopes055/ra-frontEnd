@@ -7,11 +7,12 @@ import { ListarCategoriasComponent } from "./components/listar-categorias/listar
 import { CadastrarCategoriaComponent } from "./components/cadastrar-categoria/cadastrar-categoria.component";
 import { CategoriasService } from './categorias.service';
 import { ProdutosCategoriaComponent } from "./components/produtos-categoria/produtos-categoria.component";
+import { EditarCategoriaComponent } from "./components/editar-categoria/editar-categoria.component";
 
 @Component({
   selector: 'app-categorias',
   standalone: true,
-  imports: [TabsComponent, ListarCategoriasComponent, CadastrarCategoriaComponent, ProdutosCategoriaComponent],
+  imports: [TabsComponent, ListarCategoriasComponent, CadastrarCategoriaComponent, ProdutosCategoriaComponent, EditarCategoriaComponent],
   templateUrl: './categorias.component.html',
   styleUrl: './categorias.component.scss'
 })
@@ -20,7 +21,7 @@ export class CategoriasComponent implements OnInit, OnDestroy{
   tabSelecionada: string = '';
   subscriber = new Subscriber();
 
-  mostrarProdutosDaCategoria: boolean = false;
+  mostrarComponent: string = '';
   idCategoria: any;
 
   constructor(
@@ -38,8 +39,8 @@ export class CategoriasComponent implements OnInit, OnDestroy{
 
     this.categoriaService.listarProdutosDaCategoria.subscribe((value) => {
       if(value != null) {
-        this.mostrarProdutosDaCategoria = true;
-        this.idCategoria = value;
+        this.mostrarComponent = value.labelComponent;
+        this.idCategoria = value.idCategoria;
       }
     })
   }
@@ -57,7 +58,7 @@ export class CategoriasComponent implements OnInit, OnDestroy{
   ];
 
   retornarValorTab(event: any) {
-    this.mostrarProdutosDaCategoria = false;
+    this.mostrarComponent = 'app-listar-categorias';
     this.categoriaService.listarProdutosDaCategoria.next(null);
     this.tabSelecionada = event
   }

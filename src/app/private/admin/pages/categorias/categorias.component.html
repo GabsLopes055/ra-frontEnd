@@ -3,10 +3,16 @@
 
   @switch (tabSelecionada) {
     @case ("listar-categorias") {
-      @if(mostrarProdutosDaCategoria) {
-        <app-produtos-categoria [idCategoria]="this.idCategoria"></app-produtos-categoria>
-      } @else {
-        <app-listar-categorias></app-listar-categorias>
+      @switch (mostrarComponent) {
+        @case ('listar-produtos-categoria') {
+          <app-produtos-categoria [idCategoria]="this.idCategoria"></app-produtos-categoria>
+        }
+        @case ('editar-categoria') {
+          <app-editar-categoria [idCategoria]="this.idCategoria"></app-editar-categoria>
+        }
+        @case('app-listar-categorias') {
+          <app-listar-categorias></app-listar-categorias>
+        }
       }
     }
     @case ("cadastrar-categoria") {

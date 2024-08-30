@@ -12,7 +12,7 @@ const URL = environment.base_url;
 })
 export class CategoriasService {
 
-  listarProdutosDaCategoria = new BehaviorSubject<string | null>(null);
+  listarProdutosDaCategoria = new BehaviorSubject<any>(null);
 
   constructor(
     private readonly http: HttpClient
@@ -30,7 +30,16 @@ export class CategoriasService {
     return this.http.get<categoriaComProdutos>(`${URL}/categoriasBolsas/listarProdutosPorCategoria/${idCategoria}`);
   }
 
+  public buscarCategoriaPorId(idCategoria: string) : Observable<categoria> {
+    return this.http.get<categoria>(`${URL}/categoriasBolsas/buscarCategoriaPorId/${idCategoria}`);
+  }
+
   public excluirCategoria(idCategoria: string) : Observable<void> {
     return this.http.delete<void>(`${URL}/categoriasBolsas/deletarCategoria/${idCategoria}`);
   }
+
+  public editarCategoria(idCategoria: string, categoria: categoria) : Observable<categoria> {
+    return this.http.put<categoria>(`${URL}/categoriasBolsas/editarCategoria/${idCategoria}`, categoria);
+  }
+
 }

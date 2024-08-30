@@ -13,6 +13,7 @@ import { ToastService } from '../../../../../../../shared/toast/toast.service';
   styleUrl: './produtos-categoria.component.scss',
 })
 export class ProdutosCategoriaComponent implements OnInit, OnDestroy {
+
   categoriaComProdutos!: categoriaComProdutos;
   headers = ['Nome', 'Venda', 'Custo', 'Quantidade'];
   @Input() idCategoria: any;
@@ -36,7 +37,6 @@ export class ProdutosCategoriaComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           this.categoriaComProdutos = value;
-          console.log(value.produtoResponses);
         },
         error: (error) => {
           this.toastService.error("Erro Interno", "Erro ao listar produtos desta categoria");

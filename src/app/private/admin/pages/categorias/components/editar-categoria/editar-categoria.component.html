@@ -1,0 +1,8 @@
+<main>
+  <form action="" method="post">
+      <gbs-input [placeholder]="'Nome da Categoria'" [icon]="'category'" [control]="formEditar.controls.nomeCategoria" [type]="'text'"></gbs-input>
+  </form>
+  <div class="actions">
+    <gbs-button [disabled]="!this.formEditar.valid" [label]="'Editar'" [color]="'yellow'" (click)="editarCategoria()" [icon]="'edit'"></gbs-button>
+  </div>
+</main>

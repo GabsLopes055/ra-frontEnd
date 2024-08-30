@@ -22,6 +22,7 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
   subscriber = new Subscriber();
 
   categorias: any[] = [];
+  passarValores!: valuesCategoria;
 
   totalPages: number = 0;
   pagina: number = 0;
@@ -56,11 +57,16 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
   }
 
   listarProdutosDestaCategoria(idCategoria: string) {
-    this.categoriaService.listarProdutosDaCategoria.next(idCategoria);
+
+    this.passarValores = {
+      idCategoria: idCategoria,
+      labelComponent: 'listar-produtos-categoria',
+    };
+
+    this.categoriaService.listarProdutosDaCategoria.next(this.passarValores);
   }
 
   abrirModalExclusao(idCategoria: string) {
-
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
       positionStrategy: this.overlay
@@ -84,21 +90,28 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
     modal.confirmar.subscribe(() => {
       this.excluirCategoria(idCategoria);
     });
-
-
-    this.overlayRef.keydownEvents().subscribe(() => this.closeModal());
+    // this.overlayRef.keydownEvents().subscribe(() => this.closeModal());
   }
 
   excluirCategoria(idCategoria: string) {
     this.categoriaService.excluirCategoria(idCategoria).subscribe({
       next: (value) => {
-        this.toastService.success("Sucesso", "Categoria deletada");
-        this.closeModal()
+        this.toastService.success('Sucesso', 'Categoria deletada');
+        this.closeModal();
       },
       error: (error) => {
-        console.log(error);
-      }
-    })
+        this.toastService.error(error.error.mensagem, error.error.error);
+      },
+    });
+  }
+
+  editarCategoria(idCategoria: string) {
+    this.passarValores = {
+      idCategoria: idCategoria,
+      labelComponent: 'editar-categoria',
+    };
+
+    this.categoriaService.listarProdutosDaCategoria.next(this.passarValores);
   }
 
   closeModal() {
@@ -124,4 +137,8 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
   }
+}
+export interface valuesCategoria {
+  idCategoria: string;
+  labelComponent: string;
 }
