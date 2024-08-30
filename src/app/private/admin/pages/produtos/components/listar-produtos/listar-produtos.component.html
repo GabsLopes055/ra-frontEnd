@@ -1,9 +1,10 @@
 <main>
   <div class="chips">
-    <gbs-chips [label]="'Bolsas Masculinas'" [active]="activeChip === ''" [icon]="'work'" (click)="alterarChip('')"></gbs-chips>
-    <gbs-chips [label]="'Bolsas Femininas'" [active]="activeChip === ''" [icon]="'shopping_bag'" (click)="alterarChip('')"></gbs-chips>
-    <gbs-chips [label]="'Malas'" [active]="activeChip === ''" [icon]="'travel_luggage_and_bags'" (click)="alterarChip('')"></gbs-chips>
-    <gbs-chips [label]="'Carteiras'" [active]="activeChip === ''" [icon]="'summarize'" (click)="alterarChip('')"></gbs-chips>
+    <gbs-chips [label]="'Todos'" [active]="activeChip == null" [icon]="'list'" (click)="alterarChip(null)"></gbs-chips>
+    <gbs-chips [label]="'Bolsas Masculinas'" [active]="activeChip === 'Bolsas Masculinas'" [icon]="'work'" (click)="alterarChip('Bolsas Masculinas')"></gbs-chips>
+    <gbs-chips [label]="'Bolsas Femininas'" [active]="activeChip === 'Bolsas Femininas'" [icon]="'shopping_bag'" (click)="alterarChip('Bolsas Femininas')"></gbs-chips>
+    <gbs-chips [label]="'Malas'" [active]="activeChip === 'Malas'" [icon]="'travel_luggage_and_bags'" (click)="alterarChip('Malas')"></gbs-chips>
+    <gbs-chips [label]="'Carteiras'" [active]="activeChip === 'Carteiras'" [icon]="'summarize'" (click)="alterarChip('Carteiras')"></gbs-chips>
   </div>
 
   @if (body.length > 0) {

@@ -28,7 +28,7 @@ import { OverlayRef } from 'ngx-toastr';
 })
 export class ListarProdutosComponent implements OnInit, OnDestroy {
   subscriber = new Subscriber();
-  activeChip: string = 'Todos';
+  activeChip: string | null = null;
 
   headers = ['Nome', 'Venda', 'Custo', 'Quantidade', 'Categoria', 'Ações'];
   body: any[] = [];
@@ -57,6 +57,7 @@ export class ListarProdutosComponent implements OnInit, OnDestroy {
   }
 
   listarProdutos() {
+    console.log(this.filtroBusca)
     this.produtosService.listarProdutos(this.filtroBusca).subscribe({
       next: (produtos) => {
         this.body = produtos.content;
@@ -68,16 +69,10 @@ export class ListarProdutosComponent implements OnInit, OnDestroy {
     });
   }
 
-  alterarChip(chip: string) {
-    this.activeChip = chip;
+  alterarChip(chip: string | null) {
 
-    // if (chip == 'Ativos') {
-    //   this.filtroUsuarioRequest.statusUser = StatusUser.ATIVO;
-    // } else if (chip == 'Inativos') {
-    //   this.filtroUsuarioRequest.statusUser = StatusUser.INATIVO;
-    // } else {
-    //   this.filtroUsuarioRequest.statusUser = null;
-    // }
+    this.activeChip = chip;
+    this.filtroBusca.tipoProduto = chip;
     this.listarProdutos();
   }
 

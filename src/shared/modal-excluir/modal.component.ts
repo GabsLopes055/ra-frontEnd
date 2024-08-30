@@ -10,6 +10,9 @@ import { ButtonComponent } from "../button/button.component";
 })
 export class ModalComponent {
 
+  @Input() texto: string = "";
+  @Input() subTexto: string = "";
+
   @Output() confirmar = new EventEmitter<void>();
   @Output() cancelar = new EventEmitter<void>();
 

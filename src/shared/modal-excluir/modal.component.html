@@ -1,8 +1,8 @@
 <div class="modal-backdrop">
   <div class="modal">
     <h2>Confirmar Exclusão</h2>
-    <p> Deseja realmente excluir esta categoria ?</p>
-    <span>Certifique-se de que não tenha nenhum produto vinculado a esta categoria !</span>
+    <p>{{texto}}</p>
+    <span>{{subTexto}}</span>
     <div class="modal-actions">
       <gbs-button (click)="onCancelar()" [label]="'Cancelar'" [size]="'small'" [border]="true" [fieldButton]="'outline'" [color]="'warning'"></gbs-button>
       <gbs-button (click)="onConfirmar()" [label]="'Confirmar'" [size]="'small'"></gbs-button>

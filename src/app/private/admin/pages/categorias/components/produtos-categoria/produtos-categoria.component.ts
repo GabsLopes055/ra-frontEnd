@@ -14,7 +14,7 @@ import { ToastService } from '../../../../../../../shared/toast/toast.service';
 })
 export class ProdutosCategoriaComponent implements OnInit, OnDestroy {
 
-  categoriaComProdutos!: categoriaComProdutos;
+  categoriaComProdutos: any = [];
   headers = ['Nome', 'Venda', 'Custo', 'Quantidade'];
   @Input() idCategoria: any;
 

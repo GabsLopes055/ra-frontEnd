@@ -83,6 +83,9 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
 
     const modal = modalConfirmacao.instance as ModalComponent;
 
+    modal.texto = "Deseja realmente excluir esta categoria ?";
+    modal.subTexto = "Certifique-se de que não tenha nenhum produto vinculado a esta categoria !";
+
     modal.cancelar.subscribe(() => {
       this.closeModal();
     });
