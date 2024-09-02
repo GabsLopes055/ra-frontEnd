@@ -49,11 +49,9 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
 
   cadastrarProduto() {
     if (this.formCadastrarProduto.valid) {
-
       const formValues = this.formCadastrarProduto.value;
 
       const produto = {
-
         nomeProduto: formValues.nomeProduto || '', // Converte null para string vazia
         precoVenda: parseFloat(formValues.precoVenda || '0'), // Converte string para número
         precoCompra: parseFloat(formValues.precoCusto || '0'), // Ajuste o nome da propriedade conforme necessário
@@ -64,20 +62,27 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
         },
       };
 
-      this.produtosService.cadastrarProduto(produto as produtoRequest).subscribe({
-        next: (value) => {
-          this.toastService.success('Sucesso', 'Produto cadastrado com sucesso!');
-          this.formCadastrarProduto.reset();
-        },
-        error: (error) => {
-          this.toastService.error('Erro interno', 'Erro ao cadastrar produto!');
-        },
-      });
+      this.produtosService
+        .cadastrarProduto(produto as produtoRequest)
+        .subscribe({
+          next: (value) => {
+            this.toastService.success(
+              'Sucesso',
+              'Produto cadastrado com sucesso!'
+            );
+            this.formCadastrarProduto.reset();
+          },
+          error: (error) => {
+            this.toastService.error(
+              'Erro interno',
+              'Erro ao cadastrar produto!'
+            );
+          },
+        });
     } else {
       this.toastService.info('Atenção', 'Preencha o formulário corretamente!');
     }
   }
-
 
   listarCategorias() {
     this.categoriasService

@@ -1,6 +1,6 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscriber } from 'rxjs';
 import { ButtonComponent } from '../../../../../../../shared/button/button.component';
 import { ModalComponent } from '../../../../../../../shared/modal-excluir/modal.component';
@@ -18,6 +18,7 @@ import { CategoriasService } from '../../categorias.service';
   styleUrl: './listar-categorias.component.scss',
 })
 export class ListarCategoriasComponent implements OnInit, OnDestroy {
+
   headers: string[] = ['Nome Categoria', '', 'Ações'];
   subscriber = new Subscriber();
 
@@ -93,7 +94,6 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
     modal.confirmar.subscribe(() => {
       this.excluirCategoria(idCategoria);
     });
-    // this.overlayRef.keydownEvents().subscribe(() => this.closeModal());
   }
 
   excluirCategoria(idCategoria: string) {

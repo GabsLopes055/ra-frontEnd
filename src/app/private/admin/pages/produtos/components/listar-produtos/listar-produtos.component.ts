@@ -1,18 +1,18 @@
-import { Subscriber } from 'rxjs';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TableComponent } from '../../../../../../../shared/table/table.component';
+import { Subscriber } from 'rxjs';
+import { ButtonComponent } from '../../../../../../../shared/button/button.component';
+import { ChipsComponent } from '../../../../../../../shared/chips/chips.component';
 import { PaginatorComponent } from '../../../../../../../shared/paginator/paginator.component';
+import { TableComponent } from '../../../../../../../shared/table/table.component';
+import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import {
   filtroDeBuscaProduto,
   produtos,
 } from '../../../../../../interfaces/produtos.model';
 import { ProdutosService } from '../../produtos.service';
-import { ButtonComponent } from '../../../../../../../shared/button/button.component';
-import { ChipsComponent } from '../../../../../../../shared/chips/chips.component';
-import { ToastService } from '../../../../../../../shared/toast/toast.service';
-import { FiltroDeBusca } from '../../../../../../interfaces/paginated.model';
-import { Overlay } from '@angular/cdk/overlay';
-import { OverlayRef } from 'ngx-toastr';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { ModalComponent } from '../../../../../../../shared/modal-excluir/modal.component';
 
 @Component({
   selector: 'app-listar-produtos',
@@ -21,17 +21,18 @@ import { OverlayRef } from 'ngx-toastr';
     TableComponent,
     PaginatorComponent,
     ButtonComponent,
-    ChipsComponent
+    ChipsComponent,
   ],
   templateUrl: './listar-produtos.component.html',
   styleUrl: './listar-produtos.component.scss',
 })
 export class ListarProdutosComponent implements OnInit, OnDestroy {
   subscriber = new Subscriber();
+  overlayRef!: OverlayRef;
   activeChip: string | null = null;
 
   headers = ['Nome', 'Venda', 'Custo', 'Quantidade', 'Categoria', 'Ações'];
-  body: any[] = [];
+  body: produtos[] = [];
 
   totalPages: number = 0;
   pagina: number = 0;
@@ -44,6 +45,7 @@ export class ListarProdutosComponent implements OnInit, OnDestroy {
   };
 
   constructor(
+    private readonly overlay: Overlay,
     private readonly produtosService: ProdutosService,
     private readonly toastService: ToastService
   ) {}
@@ -57,11 +59,10 @@ export class ListarProdutosComponent implements OnInit, OnDestroy {
   }
 
   listarProdutos() {
-    console.log(this.filtroBusca)
     this.produtosService.listarProdutos(this.filtroBusca).subscribe({
       next: (produtos) => {
-        this.body = produtos.content;
-        this.totalPages = produtos.totalPages
+        this.body = produtos.content.flat();
+        this.totalPages = produtos.totalPages;
       },
       error: (error) => {
         this.toastService.error('Erro Interno', 'Erro ao listar Produtos !');
@@ -69,8 +70,48 @@ export class ListarProdutosComponent implements OnInit, OnDestroy {
     });
   }
 
-  alterarChip(chip: string | null) {
+  abrirModalDeletarProduto(idProduto: string) {
 
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true,
+      positionStrategy: this.overlay
+        .position()
+        .global()
+        .centerHorizontally()
+        .centerVertically(),
+      disposeOnNavigation: true,
+    });
+
+    const modalExclusao = new ComponentPortal<ModalComponent>(ModalComponent);
+
+    const modalConfirmacao = this.overlayRef.attach(modalExclusao);
+
+    const modal = modalConfirmacao.instance as ModalComponent;
+
+    modal.texto = "Deseja realmente excluir este produto ?";
+    // modal.subTexto = "Certifique-se de que não tenha nenhum produto vinculado a esta categoria !";
+
+    modal.cancelar.subscribe(() => {
+      this.closeModal();
+    });
+
+    modal.confirmar.subscribe(() => {
+      this.excluirProduto(idProduto);
+    });
+  }
+
+  excluirProduto(idProduto: string) {
+
+  }
+
+  closeModal() {
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.listarProdutos();
+    }
+  }
+
+  alterarChip(chip: string | null) {
     this.activeChip = chip;
     this.filtroBusca.tipoProduto = chip;
     this.listarProdutos();

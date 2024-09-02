@@ -22,7 +22,7 @@ export class CadastrarUsuarioComponent implements OnInit, OnDestroy {
   ]
 
   optionsPermissao: optionsInput[] = [
-    {label: 'Selecione uma permissão para o usuário', value: ''},
+    // {label: 'Selecione uma permissão para o usuário', value: ''},
     {label: 'Usuario', value: 'USER'},
     {label: 'Administrador', value: 'ADMIN'},
     {label: 'Gerente', value: 'MANAGER'},

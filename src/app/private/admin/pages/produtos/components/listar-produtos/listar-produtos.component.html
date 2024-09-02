@@ -33,7 +33,7 @@
             <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'"
             [size]="'small'"></gbs-button>
             <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
-            [size]="'small'"></gbs-button>
+            [size]="'small'" (click)="abrirModalDeletarProduto(row.idProduto)"></gbs-button>
           </td>
         </tr>
       }

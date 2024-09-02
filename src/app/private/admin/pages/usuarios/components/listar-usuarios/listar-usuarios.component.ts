@@ -9,24 +9,37 @@ import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import {
   FiltroUsuarioRequest,
   StatusUser,
+  usuario,
 } from '../../../../../../interfaces/usuario.model';
 import { UsuariosService } from '../../usuarios.service';
 import { optionsInput } from '../../../../../../../shared/input/input.component';
-import { StatusComponent } from "../../../../../../../shared/status/status.component";
-import { ButtonComponent } from "../../../../../../../shared/button/button.component";
+import { StatusComponent } from '../../../../../../../shared/status/status.component';
+import { ButtonComponent } from '../../../../../../../shared/button/button.component';
+import { ModalComponent } from '../../../../../../../shared/modal-excluir/modal.component';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-listar-usuarios',
   standalone: true,
-  imports: [TableComponent, ListComponent, ChipsComponent, PaginatorComponent, StatusComponent, ButtonComponent],
+  imports: [
+    TableComponent,
+    ListComponent,
+    ChipsComponent,
+    PaginatorComponent,
+    StatusComponent,
+    ButtonComponent,
+  ],
   templateUrl: './listar-usuarios.component.html',
   styleUrl: './listar-usuarios.component.scss',
 })
 export class ListarUsuariosComponent implements OnInit, OnDestroy {
   subscription = new Subscriber();
   headers = ['Nome', 'Email', 'Status', 'Tipo', 'Ações'];
-  body: any[] = [];
+  body: usuario[] = [];
   activeChip: string = 'Todos';
+
+  overlayRef!: OverlayRef;
 
   totalPages!: number;
   pagina: number = 0;
@@ -41,9 +54,11 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
     role: null,
   };
 
+
   constructor(
+    private readonly overlay: Overlay,
     private readonly usuarioService: UsuariosService,
-    private readonly toast: ToastService
+    private readonly toastService: ToastService
   ) {}
 
   alterarChip(chip: string) {
@@ -71,16 +86,65 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
     this.listarUsuarios();
   }
 
+  abrirModalDesativarUsuario(userId: string) {
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true,
+      positionStrategy: this.overlay
+        .position()
+        .global()
+        .centerHorizontally()
+        .centerVertically(),
+      disposeOnNavigation: true,
+    });
+
+    const modalExclusao = new ComponentPortal<ModalComponent>(ModalComponent);
+
+    const modalConfirmacao = this.overlayRef.attach(modalExclusao);
+
+    const modal = modalConfirmacao.instance as ModalComponent;
+
+    modal.texto = "Deseja realmente desativar este usuario ?";
+    // modal.subTexto = "Certifique-se de que não tenha nenhum produto vinculado a esta categoria !";
+
+    modal.cancelar.subscribe(() => {
+      this.closeModal();
+    });
+
+    modal.confirmar.subscribe(() => {
+      this.desativarUsuario(userId);
+    });
+    // this.overlayRef.keydownEvents().subscribe(() => this.closeModal());
+  }
+
+  desativarUsuario(userId: string) {
+
+    this.usuarioService.desativarUsuario(userId).subscribe({
+      next: (string) => {
+        this.closeModal();
+        this.toastService.success("Sucesso", "Usuário desativado com sucesso !");
+      }
+    })
+
+
+  }
+
+  closeModal() {
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.listarUsuarios();
+    }
+  }
+
   listarUsuarios() {
     this.subscription.add(
       this.usuarioService.listarTodos(this.filtroUsuarioRequest).subscribe({
         next: (usuarios) => {
-          this.body = usuarios.content;
+          this.body = usuarios.content.flat();
           this.totalPages = usuarios.totalPages;
         },
         error: (error) => {
           console.log(error);
-          this.toast.error('Erro interno !', 'Erro ao listar usuários !');
+          this.toastService.error('Erro interno !', 'Erro ao listar usuários !');
         },
       })
     );

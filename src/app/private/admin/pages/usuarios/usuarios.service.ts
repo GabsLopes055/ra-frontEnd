@@ -20,4 +20,9 @@ export class UsuariosService {
   public cadastrar(usuarioRequest: usuarioRequest) : Observable<usuario> {
     return this.http.post<usuario>(`${URL}/usuarios/cadastrar`, usuarioRequest);
   }
+
+  public desativarUsuario(idUsuario: string) : Observable<string> {
+    return this.http.delete<string>(`${URL}/usuarios/deletarUsuario/${idUsuario}`);
+  }
+
 }
