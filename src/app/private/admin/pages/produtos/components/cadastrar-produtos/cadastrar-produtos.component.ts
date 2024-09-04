@@ -23,10 +23,9 @@ import {
   styleUrl: './cadastrar-produtos.component.scss',
 })
 export class CadastrarProdutosComponent implements OnInit, OnDestroy {
+
   categoria: categoria[] = [];
-  optionsCategorias: optionsInput[] = [
-    { label: 'Selecione uma categoria', value: '' },
-  ];
+  optionsCategorias: optionsInput[] = [];
 
   formCadastrarProduto = new FormGroup({
     nomeProduto: new FormControl('', Validators.required),
@@ -48,6 +47,7 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {}
 
   cadastrarProduto() {
+
     if (this.formCadastrarProduto.valid) {
       const formValues = this.formCadastrarProduto.value;
 
@@ -71,6 +71,7 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
               'Produto cadastrado com sucesso!'
             );
             this.formCadastrarProduto.reset();
+            this.ngOnInit();
           },
           error: (error) => {
             this.toastService.error(
@@ -90,6 +91,7 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (categorias) => {
           this.categoria = categorias.content.flat() as categoria[];
+          this.optionsCategorias = [{ label: 'Selecione uma categoria', value: '' }]
           this.categoria.forEach((value) => {
             this.optionsCategorias.push({
               label: value.nomeCategoria,

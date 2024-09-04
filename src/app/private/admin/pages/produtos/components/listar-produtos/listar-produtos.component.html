@@ -31,7 +31,7 @@
           </td>
           <td class="butons">
             <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'"
-            [size]="'small'"></gbs-button>
+            [size]="'small'" (click)="editarProduto(row.idProduto)"></gbs-button>
             <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
             [size]="'small'" (click)="abrirModalDeletarProduto(row.idProduto)"></gbs-button>
           </td>

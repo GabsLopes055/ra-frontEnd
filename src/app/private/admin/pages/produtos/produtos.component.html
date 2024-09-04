@@ -3,7 +3,14 @@
 
   @switch (tabSelecionada) {
     @case ("listar-produtos") {
-      <app-listar-produtos></app-listar-produtos>
+      @switch (mostrarComponent) {
+        @case ('app-produtos') {
+          <app-listar-produtos></app-listar-produtos>
+        }
+        @case ('app-editar-produto') {
+          <app-editar-produto [idProduto]="this.idProduto"></app-editar-produto>
+        }
+      }
     }
     @case ("cadastrar-produtos") {
       <app-cadastrar-produtos></app-cadastrar-produtos>

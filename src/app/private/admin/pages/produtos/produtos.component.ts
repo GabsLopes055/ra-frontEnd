@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { ProdutosService } from './produtos.service';
+import { produtoRequest } from './../../../../interfaces/produtos.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavbarService } from '../../../../../shared/navbar/navbar.service';
 import { MenuService } from '../../../../../shared/menu/menu.service';
 import { Tab, TabsComponent } from "../../../../../shared/tabs/tabs.component";
 import { ListarProdutosComponent } from "./components/listar-produtos/listar-produtos.component";
 import { CadastrarProdutosComponent } from "./components/cadastrar-produtos/cadastrar-produtos.component";
+import { EditarProdutoComponent } from "./components/editar-produto/editar-produto.component";
 
 @Component({
   selector: 'app-produtos',
   standalone: true,
-  imports: [TabsComponent, ListarProdutosComponent, CadastrarProdutosComponent],
+  imports: [TabsComponent, ListarProdutosComponent, CadastrarProdutosComponent, EditarProdutoComponent],
   templateUrl: './produtos.component.html',
   styleUrl: './produtos.component.scss'
 })
@@ -16,9 +19,13 @@ export class ProdutosComponent {
 
   tabSelecionada: string = '';
 
+  mostrarComponent: string = '';
+  idProduto: string = '';
+
   constructor(
     private readonly navbarService: NavbarService,
-    private readonly menuService: MenuService
+    private readonly menuService: MenuService,
+    private readonly produtoService: ProdutosService
   ) {
     navbarService.setTitle('Produtos');
     menuService.setMenu({
@@ -27,6 +34,14 @@ export class ProdutosComponent {
       route: '/produtos',
       checked: true,
     });
+
+    this.produtoService.behaviorProduto.subscribe((value) => {
+      if(value != null) {
+        this.idProduto = value.idEntidade;
+        this.mostrarComponent = value.labelComponent;
+      }
+    })
+
   }
 
   tabs: Tab[] = [
@@ -36,7 +51,9 @@ export class ProdutosComponent {
   ];
 
   retornarValorTab(event: any) {
-    this.tabSelecionada = event
+    this.mostrarComponent = 'app-produtos';
+    this.produtoService.behaviorProduto.next(null);
+    this.tabSelecionada = event;
   }
 
 }

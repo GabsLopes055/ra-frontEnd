@@ -9,6 +9,7 @@ import { TableComponent } from '../../../../../../../shared/table/table.componen
 import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import { FiltroDeBusca } from '../../../../../../interfaces/paginated.model';
 import { CategoriasService } from '../../categorias.service';
+import { valueBehavior } from '../../../../../../interfaces/valueBehavior.model';
 
 @Component({
   selector: 'app-listar-categorias',
@@ -23,7 +24,7 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
   subscriber = new Subscriber();
 
   categorias: any[] = [];
-  passarValores!: valuesCategoria;
+  passarValores!: valueBehavior;
 
   totalPages: number = 0;
   pagina: number = 0;
@@ -60,7 +61,7 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
   listarProdutosDestaCategoria(idCategoria: string) {
 
     this.passarValores = {
-      idCategoria: idCategoria,
+      idEntidade: idCategoria,
       labelComponent: 'listar-produtos-categoria',
     };
 
@@ -110,7 +111,7 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
 
   editarCategoria(idCategoria: string) {
     this.passarValores = {
-      idCategoria: idCategoria,
+      idEntidade: idCategoria,
       labelComponent: 'editar-categoria',
     };
 
@@ -140,8 +141,4 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
   }
-}
-export interface valuesCategoria {
-  idCategoria: string;
-  labelComponent: string;
 }

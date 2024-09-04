@@ -1,0 +1,12 @@
+<main>
+  <form>
+      <gbs-input [placeholder]="'Nome do Produto'" [icon]="'dns'" [control]="this.formEditarProduto.controls.nomeProduto" [type]="'text'"></gbs-input>
+      <gbs-input [placeholder]="'Preço de Custo'" [icon]="'payments'" [control]="this.formEditarProduto.controls.precoCusto" [type]="'number'"></gbs-input>
+      <gbs-input [placeholder]="'Preço de Venda'" [icon]="'sell'" [control]="this.formEditarProduto.controls.precoVenda" [type]="'number'"></gbs-input>
+      <gbs-input [placeholder]="'Quantidade'" [icon]="'replay_10'" [control]="this.formEditarProduto.controls.quantidade" [type]="'number'"></gbs-input>
+      <gbs-input [placeholder]="'Nome da Categoria'" [icon]="'category'" [control]="this.formEditarProduto.controls.categoria" [type]="'select'" [options]="optionsCategorias"></gbs-input>
+  </form>
+  <div class="actions">
+    <gbs-button [disabled]="!this.formEditarProduto.valid" [label]="'Cadastrar'" [color]="'secundary'" (click)="editarProduto()" [icon]="'add'"></gbs-button>
+  </div>
+</main>
