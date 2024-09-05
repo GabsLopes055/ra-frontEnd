@@ -40,7 +40,7 @@ export class CategoriasComponent implements OnInit, OnDestroy{
     this.categoriaService.listarProdutosDaCategoria.subscribe((value) => {
       if(value != null) {
         this.mostrarComponent = value.labelComponent;
-        this.idCategoria = value.idCategoria;
+        this.idCategoria = value.idEntidade;
       }
     })
   }
