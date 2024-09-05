@@ -49,6 +49,7 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
   cadastrarProduto() {
 
     if (this.formCadastrarProduto.valid) {
+
       const formValues = this.formCadastrarProduto.value;
 
       const produto = {

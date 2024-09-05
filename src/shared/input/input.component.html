@@ -11,7 +11,10 @@
   </select>
 
   } @else {
-    <input [type]="type" [placeholder]="placeholder" [formControl]="control">
+  <div class="input-wrapper">
+    <input [type]="type" [formControl]="control" [placeholder]="isFocused ? placeholder : ''">
+    <label [class.active]="isFocused || control.value">{{ placeholder }}</label>
+  </div>
   }
 
   <span class="material-symbols-outlined color-icon">

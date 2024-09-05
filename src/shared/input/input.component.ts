@@ -9,6 +9,9 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './input.component.scss',
 })
 export class InputComponent {
+
+  isFocused!: boolean;
+
   @Input() type!: string;
   @Input() icon!: string;
   @Input() options!: optionsInput[];

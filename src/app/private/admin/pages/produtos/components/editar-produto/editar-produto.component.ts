@@ -18,6 +18,7 @@ import { CategoriasService } from '../../../categorias/categorias.service';
 export class EditarProdutoComponent implements OnInit, OnDestroy {
 
   optionsCategorias: optionsInput[] = [];
+  labelCategoria: optionsInput[] = [];
   categoria: categoria[] = [];
   @Input() idProduto: string = '';
 
@@ -36,13 +37,26 @@ export class EditarProdutoComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.buscarProdutoPorId();
+    this.listarCategorias();
   }
   ngOnDestroy(): void {}
 
   buscarProdutoPorId() {
     this.produtoService.buscarProdutoPorId(this.idProduto).subscribe({
       next: (produto) => {
-        console.log(produto);
+        this.formEditarProduto.controls.nomeProduto.setValue(produto.nomeProduto);
+        this.formEditarProduto.controls.precoCusto.setValue(String(produto.precoCompra));
+        this.formEditarProduto.controls.precoVenda.setValue(String(produto.precoVenda));
+        this.formEditarProduto.controls.quantidade.setValue(String(produto.quantidade));
+
+        this.labelCategoria = [{
+          label: produto.categoria.nomeCategoria,
+          value: produto.categoria.idCategoria,
+        }]
+
+        // this.optionsCategorias = [{ label: produto.categoria.nomeCategoria, value: produto.categoria.idCategoria }]
+
+        this.formEditarProduto.controls.categoria.setValue(String(this.labelCategoria[0].label));
       },
     });
   }
