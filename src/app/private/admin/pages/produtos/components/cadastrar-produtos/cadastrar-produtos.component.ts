@@ -14,11 +14,13 @@ import {
   produtoRequest,
   produtos,
 } from '../../../../../../interfaces/produtos.model';
+import { SelectComponent } from "../../../../../../../shared/select/select.component";
+import { OptionComponent } from "../../../../../../../shared/option/option.component";
 
 @Component({
   selector: 'app-cadastrar-produtos',
   standalone: true,
-  imports: [InputComponent, ButtonComponent],
+  imports: [InputComponent, ButtonComponent, SelectComponent, OptionComponent],
   templateUrl: './cadastrar-produtos.component.html',
   styleUrl: './cadastrar-produtos.component.scss',
 })
@@ -92,7 +94,6 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (categorias) => {
           this.categoria = categorias.content.flat() as categoria[];
-          this.optionsCategorias = [{ label: 'Selecione uma categoria', value: '' }]
           this.categoria.forEach((value) => {
             this.optionsCategorias.push({
               label: value.nomeCategoria,
@@ -104,5 +105,9 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
           console.error('Erro ao listar categorias', err);
         },
       });
+  }
+
+  onValueChange(value: any) {
+    console.log(value);
   }
 }

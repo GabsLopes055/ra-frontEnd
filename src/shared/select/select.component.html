@@ -1,0 +1,9 @@
+<div class="custom-select" (click)="toggleDropdown()">
+  <div class="selected-value">{{ selectedLabel || placeholder }}</div>
+  <span class="arrow">{{ isOpen ? '▲' : '▼' }}</span>
+</div>
+@if(isOpen) {
+  <ul class="options">
+    <ng-content (click)="selectOption()"></ng-content>
+  </ul>
+}

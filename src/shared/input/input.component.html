@@ -3,7 +3,6 @@
   @if (type === 'select') {
 
   <select [formControl]="control">
-
     @for(option of options; track option) {
     <option value="{{option.value}}">{{option.label}}</option>
     }

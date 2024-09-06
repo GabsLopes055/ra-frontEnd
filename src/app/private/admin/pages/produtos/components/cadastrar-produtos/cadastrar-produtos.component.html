@@ -4,7 +4,17 @@
       <gbs-input [placeholder]="'Preço de Custo'" [icon]="'payments'" [control]="this.formCadastrarProduto.controls.precoCusto" [type]="'number'"></gbs-input>
       <gbs-input [placeholder]="'Preço de Venda'" [icon]="'sell'" [control]="this.formCadastrarProduto.controls.precoVenda" [type]="'number'"></gbs-input>
       <gbs-input [placeholder]="'Quantidade'" [icon]="'replay_10'" [control]="this.formCadastrarProduto.controls.quantidade" [type]="'number'"></gbs-input>
-      <gbs-input [placeholder]="'Nome da Categoria'" [icon]="'category'" [control]="this.formCadastrarProduto.controls.categoria" [type]="'select'" [options]="optionsCategorias"></gbs-input>
+
+      <gbs-select placeholder="Selecione uma Categoria">
+
+        @for(option of optionsCategorias; track option) {
+          <gbs-option [label]="option.label" [value]="option.value" (click)="onValueChange($event)"></gbs-option>
+          <!-- <gbs-option [label]="option.label" [value]="option.value"></gbs-option> -->
+        }
+
+      </gbs-select>
+
+      <!-- <gbs-input [placeholder]="'Nome da Categoria'" [icon]="'category'" [control]="this.formCadastrarProduto.controls.categoria" [type]="'select'" [options]="optionsCategorias"></gbs-input> -->
   </form>
   <div class="actions">
     <gbs-button [disabled]="!this.formCadastrarProduto.valid" [label]="'Cadastrar'" [color]="'secundary'" (click)="cadastrarProduto()" [icon]="'add'"></gbs-button>
