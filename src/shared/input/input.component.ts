@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -11,6 +11,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class InputComponent {
 
   isFocused!: boolean;
+  isSelect!: boolean;
 
   @Input() type!: string;
   @Input() icon!: string;
@@ -18,7 +19,22 @@ export class InputComponent {
   @Input() placeholder: string = '';
   @Input() control: FormControl = new FormControl();
   @Input() mask: string = '';
+  @Input() disabled: boolean = false;
   @Input() iconPosition: string = 'right';
+
+  @Output() optionSelecionado = new EventEmitter();
+
+  constructor(){}
+
+  retornarOptionSelecionado() {
+
+    console.log(this.isSelect + 'aqui')
+
+    if(this.isSelect) {
+      this.optionSelecionado.emit(this.options);
+    }
+  }
+
 }
 
 export interface optionsInput {

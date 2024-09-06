@@ -12,8 +12,8 @@
 
   } @else {
   <div class="input-wrapper">
-    <input [type]="type" [formControl]="control" [placeholder]="isFocused ? placeholder : ''">
-    <label [class.active]="isFocused || control.value">{{ placeholder }}</label>
+    <input [disabled]="disabled ? true : false" [type]="type" [formControl]="control" [placeholder]="isFocused ? placeholder : ''">
+    <label  [class.active]="isFocused || control.value">{{ placeholder }}</label>
   </div>
   }
 

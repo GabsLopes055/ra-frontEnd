@@ -35,6 +35,14 @@ const routes: Routes = [
         (categorias) => categorias.CategoriasComponent
       ),
   },
+  {
+    path: 'vendas',
+    canActivate: [guardRouterGuard],
+    loadComponent: () =>
+      import('../admin/pages/vendas/vendas.component').then(
+        (vendas) => vendas.VendasComponent
+      ),
+  },
 ];
 
 @NgModule({
