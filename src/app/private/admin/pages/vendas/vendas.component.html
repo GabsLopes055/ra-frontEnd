@@ -1,0 +1,12 @@
+<main>
+  <gbs-tabs [tabs]="tabs" (change)="retornarValorTab($event)"></gbs-tabs>
+
+  @switch (tabSelecionada) {
+    @case ("cadastrar-vendas") {
+      <app-cadastrar-venda></app-cadastrar-venda>
+    }
+    @case ("listar-vendas") {
+
+    }
+  }
+</main>

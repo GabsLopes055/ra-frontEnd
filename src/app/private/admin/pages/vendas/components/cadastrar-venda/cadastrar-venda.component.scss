@@ -1,0 +1,30 @@
+@import '../../../../../../../assets/colors.scss';
+
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0px;
+  gap: 24px;
+
+  .form-esqueda,
+  .form-direita {
+    height: 100%;
+    width: 100%;
+  }
+
+
+}
+.totalVenda > span {
+  padding: 14px;
+  display: flex;
+  border-radius: 50px;
+  justify-content: center;
+  // width: 100%;
+  height: auto;
+  color: $color-white;
+  font-size: 24px;
+  background-color: $color-black;
+
+}

@@ -2,8 +2,8 @@ import { categoria } from './../../../../../../interfaces/categoria.model';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CategoriasService } from '../../categorias.service';
 import { ToastService } from '../../../../../../../shared/toast/toast.service';
-import { InputComponent } from "../../../../../../../shared/input/input.component";
-import { ButtonComponent } from "../../../../../../../shared/button/button.component";
+import { InputComponent } from '../../../../../../../shared/input/input.component';
+import { ButtonComponent } from '../../../../../../../shared/button/button.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { valueBehavior } from '../../../../../../interfaces/valueBehavior.model';
 
@@ -12,10 +12,9 @@ import { valueBehavior } from '../../../../../../interfaces/valueBehavior.model'
   standalone: true,
   imports: [InputComponent, ButtonComponent],
   templateUrl: './editar-categoria.component.html',
-  styleUrl: './editar-categoria.component.scss'
+  styleUrl: './editar-categoria.component.scss',
 })
 export class EditarCategoriaComponent implements OnDestroy, OnInit {
-
   @Input() idCategoria: string = '';
 
   passarValores!: valueBehavior;
@@ -29,10 +28,9 @@ export class EditarCategoriaComponent implements OnDestroy, OnInit {
   constructor(
     private readonly categoriaService: CategoriasService,
     private readonly toastService: ToastService
-  ){}
+  ) {}
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void {}
   ngOnInit(): void {
     this.buscarCategoria();
   }
@@ -42,29 +40,33 @@ export class EditarCategoriaComponent implements OnDestroy, OnInit {
       next: (value) => {
         this.formEditar.setValue({
           idCategoria: value.idCategoria,
-          nomeCategoria: value.nomeCategoria
-        })
-      }
+          nomeCategoria: value.nomeCategoria,
+        });
+      },
+      error: (error) => {
+        this.toastService.error(error.error.mensagem, error.error.error);
+      },
     });
   }
 
   editarCategoria() {
-    this.categoriaService.editarCategoria(this.idCategoria, this.formEditar.value as categoria).subscribe({
-      next: (value) => {
+    this.categoriaService
+      .editarCategoria(this.idCategoria, this.formEditar.value as categoria)
+      .subscribe({
+        next: (value) => {
+          this.passarValores = {
+            idEntidade: this.idCategoria,
+            labelComponent: 'app-listar-categorias',
+          };
 
-        this.passarValores = {
-          idEntidade: this.idCategoria,
-          labelComponent: 'app-listar-categorias',
-        };
-
-        this.categoriaService.listarProdutosDaCategoria.next(this.passarValores);
-        this.toastService.success("Sucesso", "Categoria Editada com Sucesso");
-      },
-      error: (error) => {
-        console.log(error)
-      }
-    })
+          this.categoriaService.listarProdutosDaCategoria.next(
+            this.passarValores
+          );
+          this.toastService.success('Sucesso', 'Categoria Editada com Sucesso');
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
-
-
 }

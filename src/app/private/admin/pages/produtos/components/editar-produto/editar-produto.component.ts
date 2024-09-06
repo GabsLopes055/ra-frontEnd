@@ -34,29 +34,36 @@ export class EditarProdutoComponent implements OnInit, OnDestroy {
     private readonly produtoService: ProdutosService,
     private readonly categoriasService: CategoriasService,
     private readonly toastService: ToastService
-  ) {}
+  ) {
+  }
   ngOnInit(): void {
-    this.buscarProdutoPorId();
     this.listarCategorias();
+    this.buscarProdutoPorId();
   }
   ngOnDestroy(): void {}
 
   buscarProdutoPorId() {
     this.produtoService.buscarProdutoPorId(this.idProduto).subscribe({
       next: (produto) => {
+
         this.formEditarProduto.controls.nomeProduto.setValue(produto.nomeProduto);
         this.formEditarProduto.controls.precoCusto.setValue(String(produto.precoCompra));
         this.formEditarProduto.controls.precoVenda.setValue(String(produto.precoVenda));
         this.formEditarProduto.controls.quantidade.setValue(String(produto.quantidade));
 
-        this.labelCategoria = [{
-          label: produto.categoria.nomeCategoria,
-          value: produto.categoria.idCategoria,
-        }]
+        // console.log(produto.categoria)
 
-        // this.optionsCategorias = [{ label: produto.categoria.nomeCategoria, value: produto.categoria.idCategoria }]
+        // this.optionsCategorias.forEach((value) => {
 
-        this.formEditarProduto.controls.categoria.setValue(String(this.labelCategoria[0].label));
+        //   if(value.value == produto.categoria.idCategoria) {
+        //     console.log('categoria igual a categoria do produto')
+        //   }
+        // })
+
+        this.optionsCategorias = [{ label: produto.categoria.nomeCategoria, value: produto.categoria.idCategoria }]
+
+        this.formEditarProduto.controls.categoria.setValue(String(produto.categoria.nomeCategoria));
+
       },
     });
   }
