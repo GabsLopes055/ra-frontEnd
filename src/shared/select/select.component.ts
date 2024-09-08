@@ -1,49 +1,42 @@
-import {
-  Component,
-  ContentChildren,
-  EventEmitter,
-  Input,
-  Output,
-  QueryList,
-} from '@angular/core';
-import { OptionComponent } from '../option/option.component';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { optionsInput } from '../input/input.component';
+import { NgClass } from '@angular/common';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'gbs-select',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
 })
-export class SelectComponent {
+export class SelectComponent implements OnInit {
 
-  @Input() placeholder!: string;
-  @Output() valueChange = new EventEmitter<any>();
+  @Input() control!: FormControl;
+  @Input() placeholder: string = '';
+  @Input() options: optionsInput[] = [];
+  @Output() retornarOptionSelecionado = new EventEmitter<optionsInput>();
 
-  passarValorSelecionado!: optionsInput;
-
-  @ContentChildren(SelectComponent) options!: QueryList<OptionComponent>;
-
-  selectedLabel: string | undefined;
   isOpen = false;
+  selectedOption: optionsInput | null = null;
 
-  ngAfterContentInit() {
-    this.options.forEach((option) => {
-      option.click.subscribe(() => {
-        this.selectOption(option);
-      });
-    });
+  ngOnInit() {
+    if (this.control && this.control.value) {
+      this.selectedOption = this.options.find(option => option.value === this.control.value) || null;
+    }
   }
 
-  toggleDropdown() {
+  abrirOption() {
     this.isOpen = !this.isOpen;
   }
 
-  selectOption(option: OptionComponent) {
-    console.log("aquiiiii")
-    this.selectedLabel = option.label;
-    this.valueChange.emit(this.passarValorSelecionado);
+  selecionarOption(option: optionsInput) {
+    this.selectedOption = option;
+    this.control.setValue(option.value);
+    this.isOpen = false;
+  }
+
+  fecharOption() {
     this.isOpen = false;
   }
 }

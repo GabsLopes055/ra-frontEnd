@@ -74,7 +74,7 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
               'Produto cadastrado com sucesso!'
             );
             this.formCadastrarProduto.reset();
-            this.ngOnInit();
+            this.listarCategorias();
           },
           error: (error) => {
             this.toastService.error(
@@ -107,7 +107,7 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
       });
   }
 
-  onValueChange(value: any) {
-    console.log(value);
+  optionSelecionada(value: any) {
+    this.formCadastrarProduto.controls.categoria.setValue(value.value);
   }
 }

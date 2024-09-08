@@ -12,15 +12,12 @@ export class OptionComponent {
 
   @Input() label!: string;
   @Input() value!: string;
-  @Output() click = new EventEmitter<optionsInput>();
+  @Output() click = new EventEmitter<void>();
 
   passarValorSelecionado!: optionsInput;
 
   onSelect() {
-
-    this.passarValorSelecionado = { label: this.label, value: this.value };
-
-    this.click.emit(this.passarValorSelecionado);
+    this.click.emit();
   }
 
 }
