@@ -1,18 +1,18 @@
 <main>
 
   <div class="form-esqueda">
-    <gbs-input [icon]="'search'" [type]="'text'" [placeholder]="'Pesquisar Produto'"></gbs-input>
+    <gbs-input-select [control]="formVenda.controls.produto" [icon]="'search'" [type]="'text'" type="'select'" (produtoSelecionado)="produtoSelecionado($event)" [placeholder]="'Pesquisar Produto'"></gbs-input-select>
   </div>
   <div class="form-direita">
-    <gbs-input [icon]="'sell'" [type]="'number'" [disabled]="true" [placeholder]="'Preço de Venda'"></gbs-input>
+    <gbs-input [icon]="'sell'" [control]="formVenda.controls.precoVenda" [type]="'number'" [disabled]="true" [placeholder]="'Preço de Venda'"></gbs-input>
   </div>
 </main>
 <main>
   <div class="form-esqueda">
-    <gbs-input [icon]="'123'" [type]="'number'" [placeholder]="'Quantidade'"></gbs-input>
+    <gbs-input [icon]="'123'" [control]="formVenda.controls.quantidade" [type]="'number'" [placeholder]="'Quantidade'"></gbs-input>
   </div>
   <div class="form-direita">
-    <gbs-input [icon]="'add_diamond'" [type]="'number'" [placeholder]="'Sub-Total'"></gbs-input>
+    <gbs-input [icon]="'add_diamond'" [control]="formVenda.controls.total" [type]="'number'" [placeholder]="'Sub-Total'"></gbs-input>
   </div>
 </main>
 <br>

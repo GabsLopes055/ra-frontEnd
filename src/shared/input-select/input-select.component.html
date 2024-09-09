@@ -1,0 +1,27 @@
+<div class="input" [style.border-color]="control.value ? '#F44336' : '#000'">
+  <div class="input-wrapper">
+    @if(this.nomeProdutoSelecionado != '') {
+      {{this.nomeProdutoSelecionado}}
+    } @else {
+      <input [type]="type" [formControl]="control" [placeholder]="isFocused ? placeholder : ''" (click)="abrirOption()">
+    }
+    <label [class.active]="isFocused">{{ placeholder }}</label>
+  </div>
+  <span class="material-symbols-outlined color-icon">
+    {{icon}}
+  </span>
+</div>
+
+@if(isOpen) {
+<ul class="options">
+  @for(produto of produtos; track produto) {
+  <li (click)="retornarProdutoSelecionado(produto)">
+    {{ produto.nomeProduto }}
+  </li>
+  } @empty {
+    <li>
+      Produto não encontrado
+    </li>
+  }
+</ul>
+}

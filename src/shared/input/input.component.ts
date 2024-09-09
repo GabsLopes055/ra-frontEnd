@@ -13,7 +13,7 @@ export class InputComponent {
   isFocused!: boolean;
   isSelect!: boolean;
 
-  @Input() type!: string;
+  @Input() type: string = 'text';
   @Input() icon!: string;
   @Input() options!: optionsInput[];
   @Input() placeholder: string = '';
