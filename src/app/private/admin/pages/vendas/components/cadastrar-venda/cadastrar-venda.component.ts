@@ -18,6 +18,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrl: './cadastrar-venda.component.scss',
 })
 export class CadastrarVendaComponent implements OnInit, OnDestroy {
+  totalVenda!: number;
+
   subscriber = new Subscriber();
 
   totalPages: number = 0;
@@ -72,15 +74,15 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
 
         if (quantidade !== null && precoVenda !== null) {
           this.formVenda.controls.total.setValue(quantidade * precoVenda);
+          this.totalVenda = quantidade * precoVenda
         }
       });
   }
 
   produtoSelecionado(produto: produtos) {
-
     this.formVenda.controls.precoVenda.setValue(produto.precoVenda);
     this.formVenda.controls.total.setValue(produto.precoVenda);
-    this.formVenda.controls.quantidade.setValue(1)
+    this.formVenda.controls.quantidade.setValue(1);
     console.log(produto);
   }
 }
