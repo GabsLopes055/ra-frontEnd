@@ -66,10 +66,10 @@ export class InputSelectComponent {
 
 
   retornarProdutoSelecionado(produto: produtos) {
-    this.nomeProdutoSelecionado = produto.nomeProduto
-    // this.control.setValue(produto.nomeProduto);
+    this.nomeProdutoSelecionado = produto.nomeProduto;
+    this.control.setValue('');
     this.isOpen = false;
-    this.isFocused = true;
+    this.isFocused = false;
     this.produtoSelecionado.emit(produto);
   }
 }

@@ -1,28 +1,35 @@
 <main>
-
   <div class="form-esqueda">
     <gbs-input-select [control]="formVenda.controls.produto" [icon]="'search'" [type]="'text'" type="'select'"
       (produtoSelecionado)="produtoSelecionado($event)" [placeholder]="'Pesquisar Produto'"></gbs-input-select>
   </div>
   <div class="form-direita">
-    <gbs-input [icon]="'sell'" [control]="formVenda.controls.precoVenda" [type]="'number'" [disabled]="true"
-      [placeholder]="'Preço de Venda'"></gbs-input>
-  </div>
-</main>
-<main>
-  <div class="form-esqueda">
-    <gbs-input [icon]="'123'" [control]="formVenda.controls.quantidade" [type]="'number'"
-      [placeholder]="'Quantidade'"></gbs-input>
-  </div>
-  <div class="form-direita">
-    <gbs-input [icon]="'add_diamond'" [control]="formVenda.controls.total" [type]="'number'"
-      [placeholder]="'Sub-Total'"></gbs-input>
+    <gbs-select [placeholder]="'Formas de Pagamento'" [options]="optionsPermissao"
+      [control]="formVenda.controls.metodoPagamento"></gbs-select>
   </div>
 </main>
 <br>
 <br>
-@if(totalVenda > 0) {
-<div class="totalVenda">
-  <span>R$: {{totalVenda}}</span>
-</div>
+@if(this.produtosSelecionados.length > 0) {
+
+  <gbs-table [headers]="headers">
+    @for (row of produtosSelecionados; track row) {
+      <tr>
+        <td>
+          <span>{{row.nomeProduto}}</span>
+        </td>
+        <td>
+          <span>{{row.precoVenda}}</span>
+        </td>
+        <td>
+          <span>{{row.precoCompra}}</span>
+        </td>
+        <td class="butons">
+          <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
+          [size]="'small'"></gbs-button>
+          <!-- (click)="abrirModalDeletarProduto(row.idProduto)" -->
+        </td>
+      </tr>
+    }
+  </gbs-table>
 }

@@ -5,11 +5,12 @@ import { ButtonComponent } from '../../../../../../../shared/button/button.compo
 import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import { UsuariosService } from '../../usuarios.service';
 import { usuarioRequest } from '../../../../../../interfaces/usuario.model';
+import { InputSelectComponent } from "../../../../../../../shared/input-select/input-select.component";
 
 @Component({
   selector: 'app-cadastrar-usuarios',
   standalone: true,
-  imports: [InputComponent, ButtonComponent],
+  imports: [InputComponent, ButtonComponent, InputSelectComponent],
   templateUrl: './cadastrar-usuario.component.html',
   styleUrl: './cadastrar-usuario.component.scss',
 })
@@ -22,7 +23,7 @@ export class CadastrarUsuarioComponent implements OnInit, OnDestroy {
   ]
 
   optionsPermissao: optionsInput[] = [
-    // {label: 'Selecione uma permissão para o usuário', value: ''},
+    {label: 'Selecione uma permissão para o usuário', value: ''},
     {label: 'Usuario', value: 'USER'},
     {label: 'Administrador', value: 'ADMIN'},
     {label: 'Gerente', value: 'MANAGER'},

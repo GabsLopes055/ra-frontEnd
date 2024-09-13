@@ -1,10 +1,10 @@
 <div class="input" [style.border-color]="control.value ? '#F44336' : '#000'">
   <div class="input-wrapper">
-    @if(this.nomeProdutoSelecionado != '') {
-      {{this.nomeProdutoSelecionado}}
-    } @else {
-      <input [type]="type" [formControl]="control" [placeholder]="isFocused ? placeholder : ''" (click)="abrirOption()">
-    }
+    <input [type]="type" [formControl]="control" [placeholder]="isFocused ? placeholder : ''" (click)="abrirOption()">
+    <!-- @if(this.nomeProdutoSelecionado != '') {
+    {{this.nomeProdutoSelecionado}}
+  } @else {
+    } -->
     <label [class.active]="isFocused">{{ placeholder }}</label>
   </div>
   <span class="material-symbols-outlined color-icon">

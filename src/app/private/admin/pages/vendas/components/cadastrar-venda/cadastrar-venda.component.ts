@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { InputComponent } from '../../../../../../../shared/input/input.component';
+import { InputComponent, optionsInput } from '../../../../../../../shared/input/input.component';
 import { ProdutosService } from '../../../produtos/produtos.service';
 import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import {
@@ -9,18 +9,25 @@ import {
 import { debounce, debounceTime, Subscriber } from 'rxjs';
 import { InputSelectComponent } from '../../../../../../../shared/input-select/input-select.component';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SelectComponent } from "../../../../../../../shared/select/select.component";
+import { ButtonComponent } from "../../../../../../../shared/button/button.component";
+import { TableComponent } from "../../../../../../../shared/table/table.component";
 
 @Component({
   selector: 'app-cadastrar-venda',
   standalone: true,
-  imports: [InputComponent, InputSelectComponent],
+  imports: [InputComponent, InputSelectComponent, SelectComponent, ButtonComponent, TableComponent],
   templateUrl: './cadastrar-venda.component.html',
   styleUrl: './cadastrar-venda.component.scss',
 })
 export class CadastrarVendaComponent implements OnInit, OnDestroy {
+
+  headers = ['Nome', 'Venda', 'Custo', 'Ações'];
+  produtosSelecionados: produtos[] = [];
   totalVenda!: number;
 
   subscriber = new Subscriber();
+
 
   totalPages: number = 0;
   pagina: number = 0;
@@ -32,9 +39,17 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
     tamanhoPagina: this.tamanhoPagina,
   };
 
+  optionsPermissao: optionsInput[] = [
+    {label: 'Selecione a forma de Pagamento', value: ''},
+    {label: 'Crédito', value: 'CREDITO'},
+    {label: 'Débito', value: 'DEBITO'},
+    {label: 'Pix', value: 'PIX'},
+    {label: 'Dinheiro', value: 'DINHEIRO'}
+  ]
+
   formVenda = new FormGroup({
     produto: new FormControl(),
-    precoVenda: new FormControl(),
+    metodoPagamento: new FormControl(),
     quantidade: new FormControl(),
     total: new FormControl(),
   });
@@ -66,23 +81,24 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
   }
 
   mudarValorTotal() {
-    this.formVenda.controls.quantidade.valueChanges
-      .pipe(debounceTime(100))
-      .subscribe(() => {
-        const quantidade = this.formVenda.controls.quantidade.value;
-        const precoVenda = this.formVenda.controls.precoVenda.value;
+    // this.formVenda.controls.quantidade.valueChanges
+    //   .pipe(debounceTime(100))
+    //   .subscribe(() => {
+    //     const quantidade = this.formVenda.controls.quantidade.value;
+    //     const precoVenda = this.formVenda.controls.metodoPagamento.value;
 
-        if (quantidade !== null && precoVenda !== null) {
-          this.formVenda.controls.total.setValue(quantidade * precoVenda);
-          this.totalVenda = quantidade * precoVenda
-        }
-      });
+    //     if (quantidade !== null && precoVenda !== null) {
+    //       this.formVenda.controls.total.setValue(quantidade * precoVenda);
+    //       this.totalVenda = quantidade * precoVenda
+    //     }
+    //   });
   }
 
   produtoSelecionado(produto: produtos) {
-    this.formVenda.controls.precoVenda.setValue(produto.precoVenda);
-    this.formVenda.controls.total.setValue(produto.precoVenda);
-    this.formVenda.controls.quantidade.setValue(1);
-    console.log(produto);
+    this.produtosSelecionados.push(produto)
+    // this.formVenda.controls.precoVenda.setValue(produto.precoVenda);
+    // this.formVenda.controls.total.setValue(produto.precoVenda);
+    // this.formVenda.controls.quantidade.setValue(1);
+    console.log(this.produtosSelecionados);
   }
 }
