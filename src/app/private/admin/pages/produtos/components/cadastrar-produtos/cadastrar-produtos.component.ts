@@ -96,8 +96,8 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
           this.categoria = categorias.content.flat() as categoria[];
           this.categoria.forEach((value) => {
             this.optionsCategorias.push({
-              label: value.nomeCategoria,
               value: value.idCategoria,
+              label: value.nomeCategoria,
             });
           });
         },
@@ -107,7 +107,8 @@ export class CadastrarProdutosComponent implements OnInit, OnDestroy {
       });
   }
 
-  optionSelecionada(value: any) {
-    this.formCadastrarProduto.controls.categoria.setValue(value.value);
-  }
+  // optionSelecionada(value: any) {
+  //   console.log(value)
+  //   this.formCadastrarProduto.controls.categoria.setValue(value.value);
+  // }
 }

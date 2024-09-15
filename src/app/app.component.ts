@@ -5,6 +5,7 @@ import { Menu, MenuService } from '../shared/menu/menu.service';
 import { MenuComponent } from '../shared/menu/menu.component';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,6 +15,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MenuComponent,
     NavbarComponent,
     OverlayModule,
+    CommonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
