@@ -25,9 +25,9 @@
           <span>{{row.precoCompra}}</span>
         </td>
         <td class="butons">
-          <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
+          <gbs-button [border]="false" [color]="'primary'" (click)="removerProdutoDaLista(row)" [fieldButton]="'field'" [icon]="'delete'"
           [size]="'small'"></gbs-button>
-          <!-- (click)="abrirModalDeletarProduto(row.idProduto)" -->
+
         </td>
       </tr>
     }
