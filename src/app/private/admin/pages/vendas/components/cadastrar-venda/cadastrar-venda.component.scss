@@ -14,33 +14,38 @@ main {
     width: 100%;
   }
 
-  .form-direita > gbs-select {
+  .form-direita>gbs-select {
     height: 500px;
+  }
+
+  .inferior-button {
+    width: 35%;
+  }
+
+}
+
+td {
+  padding: 24px;
+  text-align: left;
+  background-color: #F3F4F3;
+
+  &:first-child {
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+  }
+
+  &:last-child {
+    border-bottom-right-radius: 24px;
+    border-top-right-radius: 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    height: 100%;
+    justify-content: center;
   }
 }
 
-  td {
-    padding: 24px;
-    text-align: left;
-    background-color: #F3F4F3;
-
-    &:first-child {
-      border-top-left-radius: 24px;
-      border-bottom-left-radius: 24px;
-    }
-
-    &:last-child {
-      border-bottom-right-radius: 24px;
-      border-top-right-radius: 24px;
-      display: flex;
-      flex-direction: row;
-      gap: 24px;
-      height: 100%;
-      justify-content: center;
-    }
-  }
-
-.totalVenda > span {
+.totalVenda>span {
   padding: 14px;
   display: flex;
   border-radius: 50px;

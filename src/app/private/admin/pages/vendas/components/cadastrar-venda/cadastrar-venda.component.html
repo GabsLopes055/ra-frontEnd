@@ -1,35 +1,45 @@
 <main>
   <div class="form-esqueda">
-    <gbs-input-select [control]="formVenda.controls.produto" [icon]="'search'" [type]="'text'" type="'select'"
+    <gbs-input-select [control]="formVenda.controls.produtosVendidos" [icon]="'search'" type="'select'"
       (produtoSelecionado)="produtoSelecionado($event)" [placeholder]="'Pesquisar Produto'"></gbs-input-select>
   </div>
   <div class="form-direita">
     <gbs-select [placeholder]="'Formas de Pagamento'" [options]="optionsPermissao"
       [control]="formVenda.controls.metodoPagamento"></gbs-select>
   </div>
+  <gbs-button (click)="salvarVenda()" [color]="'secundary'" [fieldButton]="'field'" [icon]="'add'"
+    [disabled]="!formVenda.valid"></gbs-button>
 </main>
-<br>
-<br>
-@if(this.produtosSelecionados.length > 0) {
 
+<!-- Verifica se há produtos selecionados -->
+@if(produtosSelecionados.length > 0) {
   <gbs-table [headers]="headers">
-    @for (row of produtosSelecionados; track row) {
-      <tr>
-        <td>
-          <span>{{row.nomeProduto}}</span>
-        </td>
-        <td>
-          <span>{{row.precoVenda}}</span>
-        </td>
-        <td>
-          <span>{{row.precoCompra}}</span>
-        </td>
-        <td class="butons">
-          <gbs-button [border]="false" [color]="'primary'" (click)="removerProdutoDaLista(row)" [fieldButton]="'field'" [icon]="'delete'"
-          [size]="'small'"></gbs-button>
-
-        </td>
-      </tr>
-    }
+    <tr *ngFor="let row of produtosSelecionados">
+      <td>
+        <span>{{ row.nomeProduto }}</span>
+      </td>
+      <td>
+        <span></span>
+      </td>
+      <td>
+        <span>{{ row.precoVenda | currency: 'BRL' }}</span>
+      </td>
+      <td>
+        <span>{{ row.precoCompra | currency: 'BRL' }}</span>
+      </td>
+      <td class="butons">
+        <gbs-button (click)="deletarProduto(row)" [border]="false" [color]="'primary'" [fieldButton]="'field'"
+          [icon]="'delete'" [size]="'small'"></gbs-button>
+      </td>
+    </tr>
   </gbs-table>
+
+  <main>
+    <div class="form-esqueda">
+      <gbs-input class="inferior" [control]="formVenda.controls.desconto" [icon]="'join_left'" [type]="'number'"
+        [placeholder]="'Aplicar Desconto'"></gbs-input>
+    </div>
+    <gbs-button class="inferior-button" [label]="totalComDesconto | currency : 'BRL'" [color]="'gray'"
+      [fieldButton]="'field'"></gbs-button>
+  </main>
 }

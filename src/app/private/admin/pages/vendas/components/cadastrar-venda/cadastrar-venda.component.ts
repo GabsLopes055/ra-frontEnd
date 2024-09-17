@@ -1,20 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  InputComponent,
-  optionsInput,
-} from '../../../../../../../shared/input/input.component';
-import { ProdutosService } from '../../../produtos/produtos.service';
-import { ToastService } from '../../../../../../../shared/toast/toast.service';
-import {
-  filtroDeBuscaProduto,
-  produtos,
-} from '../../../../../../interfaces/produtos.model';
-import { debounce, debounceTime, Subscriber } from 'rxjs';
-import { InputSelectComponent } from '../../../../../../../shared/input-select/input-select.component';
-import { FormControl, FormGroup } from '@angular/forms';
-import { SelectComponent } from '../../../../../../../shared/select/select.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { debounceTime, Subscriber } from 'rxjs';
+
 import { ButtonComponent } from '../../../../../../../shared/button/button.component';
+import { InputSelectComponent } from '../../../../../../../shared/input-select/input-select.component';
+import { InputComponent, optionsInput } from '../../../../../../../shared/input/input.component';
+import { SelectComponent } from '../../../../../../../shared/select/select.component';
 import { TableComponent } from '../../../../../../../shared/table/table.component';
+import { produtos } from '../../../../../../interfaces/produtos.model';
 
 @Component({
   selector: 'app-cadastrar-venda',
@@ -25,27 +19,21 @@ import { TableComponent } from '../../../../../../../shared/table/table.componen
     SelectComponent,
     ButtonComponent,
     TableComponent,
+    CommonModule,
   ],
   templateUrl: './cadastrar-venda.component.html',
   styleUrl: './cadastrar-venda.component.scss',
 })
 export class CadastrarVendaComponent implements OnInit, OnDestroy {
 
-  headers = ['Nome', 'Venda', 'Custo', 'Ações'];
+  headers = ['Nome', '', 'Venda', 'Custo', 'Ações'];
   produtosSelecionados: produtos[] = [];
-  totalVenda!: number;
+  totalVenda: number = 0;
+  totalComDesconto: number = 0;
+
+
 
   subscriber = new Subscriber();
-
-  totalPages: number = 0;
-  pagina: number = 0;
-  tamanhoPagina: number = 100;
-
-  filtroBusca: filtroDeBuscaProduto = {
-    tipoProduto: null,
-    pagina: this.pagina,
-    tamanhoPagina: this.tamanhoPagina,
-  };
 
   optionsPermissao: optionsInput[] = [
     { label: 'Selecione a forma de Pagamento', value: '' },
@@ -56,67 +44,64 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
   ];
 
   formVenda = new FormGroup({
-    produto: new FormControl(),
-    metodoPagamento: new FormControl(),
-    quantidade: new FormControl(),
-    total: new FormControl(),
+    produtosVendidos: new FormControl('', [Validators.required]),
+    totalVenda: new FormControl(),
+    metodoPagamento: new FormControl('', [Validators.required]),
+    status: new FormControl('CONCLUIDA'),
+    desconto: new FormControl(),
   });
 
-  constructor(
-    private readonly produtoService: ProdutosService,
-    private readonly toastService: ToastService
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.subscriber.add(this.listarProdutos());
-    this.mudarValorTotal();
+    this.descontarValor();
   }
 
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
   }
 
-  removerProdutoDaLista(excluir: produtos) {
-    this.produtosSelecionados.forEach((produto) => {
-      if(produto.idProduto == excluir.idProduto) {
-        console.log("são iguais")
-        // console.log(this.produtosSelecionados.keys)
+  deletarProduto(produto: produtos) {
+    const index: number = this.produtosSelecionados.indexOf(produto);
 
-        // this.produtosSelecionados.splice(, 1);
-      }
-    })
+    if (index > -1) {
+      this.produtosSelecionados.splice(index, 1);
+      this.atualizarTotalVenda();
+    }
   }
 
-  listarProdutos() {
-    this.produtoService.listarProdutos(this.filtroBusca).subscribe({
-      next: (produtos) => {
-        // this.body = produtos.content.flat();
-        // this.totalPages = produtos.totalPages;
-      },
-      error: (error) => {
-        this.toastService.error('Erro Interno', 'Erro ao listar Produtos !');
-      },
+  salvarVenda() {
+
+    console.log(this.formVenda.value);
+  }
+
+  descontarValor() {
+    this.formVenda.controls.desconto.valueChanges.pipe(debounceTime(500)).subscribe((desconto) => {
+      this.atualizarTotalComDesconto(desconto);
     });
   }
 
-  mudarValorTotal() {
-    // this.formVenda.controls.quantidade.valueChanges
-    //   .pipe(debounceTime(100))
-    //   .subscribe(() => {
-    //     const quantidade = this.formVenda.controls.quantidade.value;
-    //     const precoVenda = this.formVenda.controls.metodoPagamento.value;
-    //     if (quantidade !== null && precoVenda !== null) {
-    //       this.formVenda.controls.total.setValue(quantidade * precoVenda);
-    //       this.totalVenda = quantidade * precoVenda
-    //     }
-    //   });
+  atualizarTotalComDesconto(desconto: number) {
+    if (desconto && desconto > 0 && desconto <= this.totalVenda) {
+      this.totalComDesconto = this.totalVenda - desconto;
+    } else {
+      this.totalComDesconto = this.totalVenda;
+    }
+
+    this.formVenda.controls.totalVenda.setValue(this.totalComDesconto);
+
   }
 
   produtoSelecionado(produto: produtos) {
     this.produtosSelecionados.push(produto);
-    // this.formVenda.controls.precoVenda.setValue(produto.precoVenda);
-    // this.formVenda.controls.total.setValue(produto.precoVenda);
-    // this.formVenda.controls.quantidade.setValue(1);
-    console.log(this.produtosSelecionados);
+    this.atualizarTotalVenda();
+  }
+
+  atualizarTotalVenda() {
+    this.totalVenda = this.produtosSelecionados.reduce((acumulador, produto) => acumulador + produto.precoVenda, 0);
+    this.formVenda.controls.totalVenda.setValue(this.totalVenda);
+
+    // Atualiza o valor com desconto aplicado
+    this.atualizarTotalComDesconto(this.formVenda.controls.desconto.value || 0);
   }
 }

@@ -17,7 +17,7 @@ export class ButtonComponent {
   @Input() border: boolean = true;
   @Input() size: 'small' | 'middle' = 'middle';
   @Input() type: 'submit' | 'button' = 'button';
-  @Input() label: string = '';
+  @Input() label: any;
 
   protected hover = false;
 
@@ -36,11 +36,11 @@ export class ButtonComponent {
     warning: '',
     success: '',
     error: '#EE0D43',
-    yellow: '#FFAC33'
+    yellow: '#FFAC33',
+    gray: '#6A6A66'
   }
-
 }
-type TypeColors = 'primary' | 'secundary' | 'warning' | 'success' | 'error' | 'yellow';
+type TypeColors = 'primary' | 'secundary' | 'warning' | 'success' | 'error' | 'yellow' | 'gray';
 
 type Colors = {
   [key in TypeColors]: string;
