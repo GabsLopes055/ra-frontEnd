@@ -6,7 +6,8 @@ main {
   margin: 0px 24px 0px 24px;
   // gap: 34px;
 
-  app-cadastrar-venda {
+  app-cadastrar-venda,
+  app-listar-vendas {
     padding: 24px 0px;
     height: 100%;
     overflow: auto;

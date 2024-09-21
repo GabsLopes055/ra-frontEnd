@@ -1,3 +1,4 @@
+import { EntityPaginated, FiltroDeBusca } from './../../../../interfaces/paginated.model';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +15,10 @@ export class VendasService {
 
   public cadastrarVenda(venda: venda) : Observable<venda> {
     return this.http.post<venda>(`${URL}/vendas/cadastrarVenda`, venda);
+  }
+
+  public listarTodasAsVendas(filtro: FiltroDeBusca): Observable<EntityPaginated<venda[]>> {
+    return this.http.post<EntityPaginated<venda[]>>(`${URL}/vendas/listarVendas`, filtro);
   }
 
 }

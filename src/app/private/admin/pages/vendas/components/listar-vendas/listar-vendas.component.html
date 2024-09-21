@@ -1,0 +1,48 @@
+<main>
+  <div class="chips">
+    <gbs-chips [label]="'Hoje'" [active]="activeChip == null"></gbs-chips>
+    <gbs-chips [label]="'7 dias'" [active]="activeChip === 'Bolsas Masculinas'"></gbs-chips>
+    <gbs-chips [label]="'15 Dias'" [active]="activeChip === 'Bolsas Femininas'"></gbs-chips>
+    <gbs-chips [label]="'Ultimo Mês'" [active]="activeChip === 'Malas'"></gbs-chips>
+    <gbs-chips [label]="'Todas'" [active]="activeChip === 'Carteiras'"></gbs-chips>
+  </div>
+
+  @if (vendas.length > 0) {
+    <gbs-table [headers]="headers">
+      @for (row of vendas; track row) {
+        <tr>
+          <!-- <td>
+            <span>{{row.produtosVendidos?.length}}</span>
+          </td> -->
+          <td>
+            <span>{{row.dataVenda |  date : 'dd/MM/yyyy HH:mm'}}</span>
+          </td>
+          <td>
+            <span>{{row.totalVenda}}</span>
+          </td>
+          <td>
+            <span>{{row.metodoPagamento}}</span>
+          </td>
+          <td>
+            <span>{{row.desconto}}</span>
+          </td>
+          <td class="butons">
+            <gbs-button [border]="false" [color]="'secundary'" [fieldButton]="'field'" [icon]="' production_quantity_limits '"
+            [size]="'small'"></gbs-button>
+            <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'"
+            [size]="'small'"></gbs-button>
+            <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
+            [size]="'small'"></gbs-button>
+          </td>
+        </tr>
+      }
+    </gbs-table>
+    <div class="paginator">
+      <gbs-paginator [totalPages]="totalPages" (change)="passarPaginas($event)"></gbs-paginator>
+    </div>
+  } @else {
+    <div class="vazio">
+      <img src="../../../../../../../assets/img/vazio.png" alt="" width="400" height="600">
+    </div>
+  }
+  </main>

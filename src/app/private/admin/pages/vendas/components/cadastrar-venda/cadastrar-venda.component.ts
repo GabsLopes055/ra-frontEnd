@@ -63,7 +63,8 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-    private readonly vendasService: VendasService
+    private readonly vendasService: VendasService,
+    private readonly toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -86,9 +87,8 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
   salvarVenda() {
     // Verifica se há produtos selecionados e se o método de pagamento foi preenchido
     if (this.produtosSelecionados.length > 0 && this.formVenda.controls.metodoPagamento.value !== '') {
-
       // Preenchendo diretamente a variável venda
-      this.venda = {
+      const venda = {
         produtosVendidos: this.produtosSelecionados,
         totalVenda: this.formVenda.controls.totalVenda.value,
         metodoPagamento: this.formVenda.controls.metodoPagamento.value,
@@ -96,13 +96,19 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
         desconto: this.formVenda.controls.desconto.value
       };
 
+      console.log(venda)
+
       // Chamando o serviço de cadastro de venda
-      this.vendasService.cadastrarVenda(this.venda).subscribe({
+      this.vendasService.cadastrarVenda(venda as venda).subscribe({
         next: (venda) => {
-          console.log(venda);
+          this.toastService.success("Sucesso !", "Venda Cadastrada com Sucesso !")
+          this.formVenda.reset();
+          this.formVenda.controls.produtosVendidos.setValue("");
+          // this.formVenda.controls.metodoPagamento.setValue("");
+          this.produtosSelecionados.length = 0;
         },
         error: (err) => {
-          console.error('Erro ao cadastrar venda:', err);
+          this.toastService.error("Erro interno !", "Erro ao cadastrar a venda !")
         }
       });
     } else {

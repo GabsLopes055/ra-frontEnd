@@ -1,0 +1,51 @@
+main {
+  display: flex;
+  flex-direction: column;
+
+  .chips {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-content: center;
+  }
+
+  gbs-table {
+    max-height: 650px;
+  }
+
+  .paginator {
+    padding: 24px 0px;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+  }
+
+  td {
+    padding: 24px;
+    text-align: left;
+    background-color: #F3F4F3;
+
+    &:first-child {
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: 24px;
+      border-top-right-radius: 24px;
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      height: 100%;
+      justify-content: center;
+    }
+  }
+
+  .vazio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+}

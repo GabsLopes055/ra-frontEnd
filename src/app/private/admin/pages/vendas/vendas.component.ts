@@ -4,11 +4,12 @@ import { MenuService } from '../../../../../shared/menu/menu.service';
 import { NavbarService } from '../../../../../shared/navbar/navbar.service';
 import { Tab, TabsComponent } from '../../../../../shared/tabs/tabs.component';
 import { CadastrarVendaComponent } from "./components/cadastrar-venda/cadastrar-venda.component";
+import { ListarVendasComponent } from "./components/listar-vendas/listar-vendas.component";
 
 @Component({
   selector: 'app-vendas',
   standalone: true,
-  imports: [TabsComponent, CadastrarVendaComponent],
+  imports: [TabsComponent, CadastrarVendaComponent, ListarVendasComponent],
   templateUrl: './vendas.component.html',
   styleUrl: './vendas.component.scss'
 })
