@@ -1,3 +1,4 @@
+import { FiltroDeBusca } from './paginated.model';
 import { produtos } from './produtos.model';
 
 export interface venda extends produtos {
@@ -21,4 +22,8 @@ export enum status {
   CONCLUIDA,
   CANCELADA,
   PENDENTE,
+}
+
+export interface filtroVenda extends FiltroDeBusca {
+  dataBusca: string | null
 }

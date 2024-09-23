@@ -1,25 +1,16 @@
-import { VendasService } from './../../vendas.service';
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { combineLatest, debounceTime, Subscriber } from 'rxjs';
-
+import { debounceTime, Subscriber } from 'rxjs';
 import { ButtonComponent } from '../../../../../../../shared/button/button.component';
 import { InputSelectComponent } from '../../../../../../../shared/input-select/input-select.component';
-import {
-  InputComponent,
-  optionsInput,
-} from '../../../../../../../shared/input/input.component';
+import { InputComponent, optionsInput } from '../../../../../../../shared/input/input.component';
 import { SelectComponent } from '../../../../../../../shared/select/select.component';
 import { TableComponent } from '../../../../../../../shared/table/table.component';
 import { ToastService } from '../../../../../../../shared/toast/toast.service';
-import {
-  filtroDeBuscaProduto,
-  produtos,
-} from '../../../../../../interfaces/produtos.model';
-import { ProdutosService } from '../../../produtos/produtos.service';
-import { CommonModule } from '@angular/common';
+import { produtos } from '../../../../../../interfaces/produtos.model';
 import { venda } from '../../../../../../interfaces/venda.model';
-import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { VendasService } from './../../vendas.service';
 
 @Component({
   selector: 'app-cadastrar-venda',

@@ -1,10 +1,10 @@
 <main>
   <div class="chips">
-    <gbs-chips [label]="'Hoje'" [active]="activeChip == null"></gbs-chips>
-    <gbs-chips [label]="'7 dias'" [active]="activeChip === 'Bolsas Masculinas'"></gbs-chips>
-    <gbs-chips [label]="'15 Dias'" [active]="activeChip === 'Bolsas Femininas'"></gbs-chips>
-    <gbs-chips [label]="'Ultimo Mês'" [active]="activeChip === 'Malas'"></gbs-chips>
-    <gbs-chips [label]="'Todas'" [active]="activeChip === 'Carteiras'"></gbs-chips>
+    <gbs-chips [label]="'Hoje'" [icon]="'calendar_month'" [active]="activeChip == null" (click)="alterarChip(null)"></gbs-chips>
+    <gbs-chips [label]="'7 dias'" [icon]="'calendar_month'" [active]="activeChip === '7'" (click)="alterarChip('7')"></gbs-chips>
+    <gbs-chips [label]="'15 Dias'" [icon]="'calendar_month'" [active]="activeChip === '15'" (click)="alterarChip('15')"></gbs-chips>
+    <gbs-chips [label]="'Ultimo Mês'" [icon]="'calendar_month'" [active]="activeChip === 'Ultimo Mês'" (click)="alterarChip('Ultimo Mês')"></gbs-chips>
+    <gbs-chips [label]="'Todas'" [icon]="'calendar_month'" [active]="activeChip === 'Todas'" (click)="alterarChip('Todas')"></gbs-chips>
   </div>
 
   @if (vendas.length > 0) {
@@ -18,7 +18,7 @@
             <span>{{row.dataVenda |  date : 'dd/MM/yyyy HH:mm'}}</span>
           </td>
           <td>
-            <span>{{row.totalVenda}}</span>
+            <span>{{row.totalVenda | currency: 'BRL'}}</span>
           </td>
           <td>
             <span>{{row.metodoPagamento}}</span>
