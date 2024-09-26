@@ -25,5 +25,6 @@ export enum status {
 }
 
 export interface filtroVenda extends FiltroDeBusca {
-  dataBusca: string | null
+  dataInicio: any,
+  dataFim: any
 }

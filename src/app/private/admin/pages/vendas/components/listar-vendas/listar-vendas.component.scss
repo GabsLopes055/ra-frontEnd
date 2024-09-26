@@ -3,10 +3,26 @@ main {
   flex-direction: column;
 
   .chips {
+
     display: flex;
     flex-direction: row;
-    gap: 24px;
-    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+
+    .gbsChips {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      align-content: center;
+    }
+    .escolherDatas {
+      // background-color: aqua;
+      display: flex;
+      flex-direction: row;
+      // gap: 24px;
+      align-content: end;
+    }
+
   }
 
   gbs-table {

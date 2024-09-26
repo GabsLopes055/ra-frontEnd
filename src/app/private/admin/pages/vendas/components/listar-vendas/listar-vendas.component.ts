@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { ToastService } from './../../../../../../../shared/toast/toast.service';
-import { VendasService } from './../../vendas.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../../../../shared/button/button.component';
-import { PaginatorComponent } from '../../../../../../../shared/paginator/paginator.component';
 import { ChipsComponent } from '../../../../../../../shared/chips/chips.component';
+import { PaginatorComponent } from '../../../../../../../shared/paginator/paginator.component';
 import { TableComponent } from '../../../../../../../shared/table/table.component';
-import { FiltroDeBusca } from '../../../../../../interfaces/paginated.model';
 import { filtroVenda, venda } from '../../../../../../interfaces/venda.model';
+import { ToastService } from './../../../../../../../shared/toast/toast.service';
+import { VendasService } from './../../vendas.service';
+import { DateComponent } from '../../../../../../../shared/date/date.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-listar-vendas',
@@ -18,12 +19,16 @@ import { filtroVenda, venda } from '../../../../../../interfaces/venda.model';
     ChipsComponent,
     TableComponent,
     CommonModule,
+    DateComponent,
   ],
   templateUrl: './listar-vendas.component.html',
   styleUrl: './listar-vendas.component.scss',
 })
 export class ListarVendasComponent implements OnInit, OnDestroy {
   activeChip: string | null = null;
+  dataInicio: Date = new Date();
+  dataFim: Date = new Date();
+
   headers: string[] = [
     'Data',
     'Total',
@@ -39,7 +44,8 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
   tamanhoPagina: number = 10;
 
   filtroBusca: filtroVenda = {
-    dataBusca: this.activeChip,
+    dataInicio: this.dataInicio,
+    dataFim: this.dataFim,
     pagina: this.pagina,
     tamanhoPagina: this.tamanhoPagina,
   };
@@ -47,7 +53,10 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
   constructor(
     private readonly vendaService: VendasService,
     private readonly toastService: ToastService
-  ) {}
+  ) {
+    this.dataInicio = new Date(this.dataInicio.toISOString());
+    this.dataFim = new Date(this.dataFim.toISOString());
+  }
 
   ngOnInit(): void {
     this.listarTodasVendas();
@@ -57,7 +66,7 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
   listarTodasVendas() {
     this.vendaService.listarTodasAsVendas(this.filtroBusca).subscribe({
       next: (venda) => {
-        this.totalPages = venda.totalElements;
+        this.totalPages = venda.totalPages;
         this.vendas = venda.content.flat();
       },
       error: (error) => {
@@ -68,7 +77,29 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
 
   alterarChip(chip: string | null) {
     this.activeChip = chip;
-    this.filtroBusca.dataBusca = chip;
+
+    if (chip === null) {
+      this.filtroBusca.dataInicio = new Date(this.dataInicio.toISOString());
+    } else if (chip === '7') {
+      this.filtroBusca.dataInicio.setDate(this.dataInicio.getDate() - 7);
+    } else if (chip === '15') {
+      this.filtroBusca.dataInicio.setDate(this.dataInicio.getDate() - 15);
+    } else if (chip === 'Ultimo Mês') {
+      this.filtroBusca.dataInicio.setMonth(this.dataInicio.getMonth() - 1);
+    } else {
+      this.filtroBusca.dataInicio.setYear(this.dataInicio.getFullYear() - 10);
+    }
+
+    this.filtroBusca.pagina = 0;
+    this.totalPages = 0;
+    this.pagina = 0;
+
+    this.listarTodasVendas();
+  }
+
+  retornarData(event: Date) {
+    this.activeChip = 'selecionarDatas';
+    this.filtroBusca.dataInicio = event.toISOString();
     this.listarTodasVendas();
   }
 
