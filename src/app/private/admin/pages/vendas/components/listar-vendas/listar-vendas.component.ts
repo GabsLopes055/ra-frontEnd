@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../../../../shared/button/button.component';
 import { ChipsComponent } from '../../../../../../../shared/chips/chips.component';
+import { DateComponent } from '../../../../../../../shared/date/date.component';
 import { PaginatorComponent } from '../../../../../../../shared/paginator/paginator.component';
 import { TableComponent } from '../../../../../../../shared/table/table.component';
+import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import { filtroVenda, venda } from '../../../../../../interfaces/venda.model';
-import { ToastService } from './../../../../../../../shared/toast/toast.service';
-import { VendasService } from './../../vendas.service';
-import { DateComponent } from '../../../../../../../shared/date/date.component';
-import { FormControl } from '@angular/forms';
+import { VendasService } from '../../vendas.service';
+
 
 @Component({
   selector: 'app-listar-vendas',
