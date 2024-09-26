@@ -94,6 +94,8 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
     this.totalPages = 0;
     this.pagina = 0;
 
+    console.log('aqui')
+
     this.listarTodasVendas();
   }
 
