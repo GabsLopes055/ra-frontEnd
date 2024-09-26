@@ -8,7 +8,7 @@ import { TableComponent } from '../../../../../../../shared/table/table.componen
 import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import { filtroVenda, venda } from '../../../../../../interfaces/venda.model';
 import { VendasService } from '../../vendas.service';
-
+import { valueBehavior } from '../../../../../../interfaces/valueBehavior.model';
 
 @Component({
   selector: 'app-listar-vendas',
@@ -25,6 +25,7 @@ import { VendasService } from '../../vendas.service';
   styleUrl: './listar-vendas.component.scss',
 })
 export class ListarVendasComponent implements OnInit, OnDestroy {
+
   activeChip: string | null = null;
   dataInicio: Date = new Date();
   dataFim: Date = new Date();
@@ -38,6 +39,11 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
   ];
 
   vendas: venda[] = [];
+
+  valueBehavior: valueBehavior = {
+    idEntidade: null,
+    labelComponent: null
+  };
 
   totalPages: number = 0;
   pagina: number = 0;
@@ -94,8 +100,6 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
     this.totalPages = 0;
     this.pagina = 0;
 
-    console.log('aqui')
-
     this.listarTodasVendas();
   }
 
@@ -108,5 +112,13 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
   passarPaginas(pagina: number) {
     this.filtroBusca.pagina = pagina;
     this.listarTodasVendas();
+  }
+
+  abrirComponentVendasPorId(idVenda: string | null) {
+    this.valueBehavior = {
+      idEntidade: idVenda,
+      labelComponent: 'app-listar-venda-por-id'
+    };
+    this.vendaService.abrirComponentVendaPorId.next(this.valueBehavior);
   }
 }

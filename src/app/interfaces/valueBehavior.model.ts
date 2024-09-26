@@ -1,4 +1,4 @@
 export interface valueBehavior {
-  idEntidade: string;
-  labelComponent: string;
+  idEntidade: string | null;
+  labelComponent: string | null;
 }
