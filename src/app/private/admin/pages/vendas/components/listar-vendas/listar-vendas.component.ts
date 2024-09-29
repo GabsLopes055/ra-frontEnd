@@ -121,4 +121,18 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
     };
     this.vendaService.abrirComponentVendaPorId.next(this.valueBehavior);
   }
+
+  retornaMetodoDePagamento(metodo: string | null): string | null {
+
+    let metodoRetorno = metodo;
+
+    if(metodo === 'PIX') metodoRetorno = 'Pix'
+    if(metodo === 'DINHEIRO') metodoRetorno = 'Dinheiro'
+    if(metodo === 'CREDITO') metodoRetorno = 'Crédito'
+    if(metodo === 'DEBITO') metodoRetorno = 'Débito'
+
+
+    return metodoRetorno;
+
+  }
 }
