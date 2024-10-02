@@ -17,7 +17,7 @@ export class ListarVendaPorIdComponent implements OnInit, OnDestroy {
   @Input() idVenda: string | null = '';
 
   venda!: venda;
-  headers = ['Nome', 'Venda', 'Custo', 'Quantidade'];
+  headers = ['Nome', 'Venda', 'Custo'];
 
   constructor(
     private readonly vendasService: VendasService,

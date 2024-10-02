@@ -8,17 +8,19 @@
     </div>
     <gbs-chips [label]="venda.dataVenda | date: 'dd-MM-YYYY'"></gbs-chips>
   </div>
-  <div class="desconto">
-    <div class="descontoVenda">
-      <div class="icon">
-        <p>Desconto: &nbsp;</p>
-        <span class="material-symbols-outlined">
-          payments
-        </span>
+  @if(venda.desconto) {
+    <div class="desconto">
+      <div class="descontoVenda">
+        <div class="icon">
+          <p>Desconto: &nbsp;</p>
+          <span class="material-symbols-outlined">
+            payments
+          </span>
+        </div>
+        <gbs-chips [label]="venda.desconto | currency: 'BRL'"></gbs-chips>
       </div>
-      <gbs-chips [label]="venda.desconto | currency: 'BRL'"></gbs-chips>
     </div>
-  </div>
+  }
   <div class="dataVenda">
     <div class="icon">
       <p>Metodo de Pagamento: &nbsp;</p>
@@ -52,9 +54,6 @@
       </td>
       <td>
         <span>{{row.precoCompra | currency: 'BRL'}}</span>
-      </td>
-      <td>
-        <span>{{row.quantidade}}</span>
       </td>
     </tr>
   }
