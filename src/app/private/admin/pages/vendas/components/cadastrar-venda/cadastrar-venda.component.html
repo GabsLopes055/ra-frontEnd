@@ -8,7 +8,7 @@
       [control]="formVenda.controls.metodoPagamento"></gbs-select>
   </div>
   <gbs-button (click)="salvarVenda()" [color]="'secundary'" [fieldButton]="'field'" [icon]="'add'"
-    [disabled]="!formVenda.valid"></gbs-button>
+    [disabled]="(produtosSelecionados.length <= 0) || (formVenda.controls.metodoPagamento.value === '')"></gbs-button>
 </main>
 
 <!-- Verifica se há produtos selecionados -->

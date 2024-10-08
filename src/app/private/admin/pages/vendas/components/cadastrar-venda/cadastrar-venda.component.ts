@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { VendasService } from './../../vendas.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, Subscriber } from 'rxjs';
@@ -8,7 +9,14 @@ import { InputSelectComponent } from '../../../../../../../shared/input-select/i
 import { InputComponent, optionsInput } from '../../../../../../../shared/input/input.component';
 import { SelectComponent } from '../../../../../../../shared/select/select.component';
 import { TableComponent } from '../../../../../../../shared/table/table.component';
-import { produtos } from '../../../../../../interfaces/produtos.model';
+import { ToastService } from '../../../../../../../shared/toast/toast.service';
+import {
+  filtroDeBuscaProduto,
+  produtos,
+} from '../../../../../../interfaces/produtos.model';
+import { ProdutosService } from '../../../produtos/produtos.service';
+import { venda } from '../../../../../../interfaces/venda.model';
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-cadastrar-venda',
@@ -30,7 +38,7 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
   produtosSelecionados: produtos[] = [];
   totalVenda: number = 0;
   totalComDesconto: number = 0;
-
+  venda!: venda;
 
 
   subscriber = new Subscriber();
@@ -51,7 +59,10 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
     desconto: new FormControl(),
   });
 
-  constructor() {}
+  constructor(
+    private readonly vendasService: VendasService,
+    private readonly toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.descontarValor();
@@ -71,9 +82,33 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
   }
 
   salvarVenda() {
+    // Verifica se há produtos selecionados e se o método de pagamento foi preenchido
+    if (this.produtosSelecionados.length > 0 && this.formVenda.controls.metodoPagamento.value !== '') {
 
-    console.log(this.formVenda.value);
+      // Preenchendo diretamente a variável venda
+      // this.venda = {
+      //   produtosVendidos: this.produtosSelecionados,
+      //   totalVenda: this.formVenda.controls.totalVenda.value,
+      //   metodoPagamento: this.formVenda.controls.metodoPagamento.value,
+      //   status: this.formVenda.controls.status.value,
+      //   desconto: this.formVenda.controls.desconto.value
+      // };
+
+      // Chamando o serviço de cadastro de venda
+      // this.vendasService.cadastrarVenda(this.venda).subscribe({
+      //   next: (venda) => {
+      //     console.log(venda);
+      //   },
+      //   error: (err) => {
+      //     console.error('Erro ao cadastrar venda:', err);
+      //   }
+      // });
+    } else {
+      this.toastService.info("Atenção", "Selecione produtos e informe o método de pagamento");
+    }
   }
+
+
 
   descontarValor() {
     this.formVenda.controls.desconto.valueChanges.pipe(debounceTime(500)).subscribe((desconto) => {
