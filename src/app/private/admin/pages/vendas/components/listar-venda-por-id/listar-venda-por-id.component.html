@@ -1,0 +1,60 @@
+<div class="venda-header">
+  <div class="dataVenda">
+    <div class="icon">
+      <p>Data da Venda: &nbsp;</p>
+      <span class="material-symbols-outlined">
+        calendar_month
+      </span>
+    </div>
+    <gbs-chips [label]="venda.dataVenda | date: 'dd-MM-YYYY'"></gbs-chips>
+  </div>
+  @if(venda.desconto) {
+    <div class="desconto">
+      <div class="descontoVenda">
+        <div class="icon">
+          <p>Desconto: &nbsp;</p>
+          <span class="material-symbols-outlined">
+            payments
+          </span>
+        </div>
+        <gbs-chips [label]="venda.desconto | currency: 'BRL'"></gbs-chips>
+      </div>
+    </div>
+  }
+  <div class="dataVenda">
+    <div class="icon">
+      <p>Metodo de Pagamento: &nbsp;</p>
+      <span class="material-symbols-outlined">
+        credit_card
+      </span>
+    </div>
+    <gbs-chips [label]="retornaMetodoDePagamento(venda.metodoPagamento)"></gbs-chips>
+  </div>
+  <div class="desconto">
+    <div class="descontoVenda">
+      <div class="icon">
+        <p>Total: &nbsp;</p>
+        <span class="material-symbols-outlined">
+          sell
+        </span>
+      </div>
+      <gbs-chips [label]="venda.totalVenda | currency: 'BRL'"></gbs-chips>
+    </div>
+  </div>
+</div>
+<br>
+<gbs-table [headers]="headers">
+  @for (row of venda.produtosVendidos; track row) {
+    <tr>
+      <td>
+        <span>{{row.nomeProduto}}</span>
+      </td>
+      <td>
+        <span>{{row.precoVenda | currency: 'BRL'}}</span>
+      </td>
+      <td>
+        <span>{{row.precoCompra | currency: 'BRL'}}</span>
+      </td>
+    </tr>
+  }
+</gbs-table>

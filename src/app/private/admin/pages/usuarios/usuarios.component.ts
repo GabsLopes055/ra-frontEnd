@@ -11,18 +11,21 @@ import { Tab, TabsComponent } from '../../../../../shared/tabs/tabs.component';
 import { ListarUsuariosComponent } from "./components/listar-usuarios/listar-usuarios.component";
 import { CadastrarUsuarioComponent } from "./components/cadastrar-usuarios/cadastrar-usuario.component";
 import { PaginatorComponent } from "../../../../../shared/paginator/paginator.component";
+import { EditarUsuarioComponent } from "./components/editar-usuario/editar-usuario.component";
 
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [TableComponent, TabsComponent, ListarUsuariosComponent, CadastrarUsuarioComponent, PaginatorComponent],
+  imports: [TableComponent, TabsComponent, ListarUsuariosComponent, CadastrarUsuarioComponent, PaginatorComponent, EditarUsuarioComponent],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.scss',
 })
-export class UsuariosComponent{
+export class UsuariosComponent implements OnInit{
 
 
   tabSelecionada: string = '';
+
+  userId: string = '';
 
 
   tabs: Tab[] = [
@@ -34,7 +37,8 @@ export class UsuariosComponent{
 
   constructor(
     private readonly navbarService: NavbarService,
-    private readonly menuService: MenuService
+    private readonly menuService: MenuService,
+    private readonly usuarioService: UsuariosService
   ) {
     navbarService.setTitle('Usuarios');
     menuService.setMenu({
@@ -43,6 +47,15 @@ export class UsuariosComponent{
       route: '/usuarios',
       checked: true,
     });
+  }
+
+  ngOnInit(): void {
+    this.usuarioService.editarUsuario.subscribe(value => {
+      if(value != null) {
+        this.tabSelecionada = value.label;
+        this.userId = value.value;
+      }
+    })
   }
 
   retornarValorTab(event: any) {

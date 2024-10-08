@@ -130,11 +130,6 @@ export class ListarCategoriasComponent implements OnInit, OnDestroy {
     this.listarCategorias();
   }
 
-  // @HostListener('document:keydown.escape', ['$event'])
-  // onEsc(event: KeyboardEvent) {
-  //   this.closeModal();
-  // }
-
   ngOnInit(): void {
     this.subscriber.add(this.listarCategorias());
   }

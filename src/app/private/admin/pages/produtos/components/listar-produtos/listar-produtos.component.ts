@@ -14,6 +14,7 @@ import { ProdutosService } from '../../produtos.service';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ModalComponent } from '../../../../../../../shared/modal-excluir/modal.component';
 import { valueBehavior } from '../../../../../../interfaces/valueBehavior.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-listar-produtos',
@@ -23,6 +24,7 @@ import { valueBehavior } from '../../../../../../interfaces/valueBehavior.model'
     PaginatorComponent,
     ButtonComponent,
     ChipsComponent,
+    CommonModule
   ],
   templateUrl: './listar-produtos.component.html',
   styleUrl: './listar-produtos.component.scss',

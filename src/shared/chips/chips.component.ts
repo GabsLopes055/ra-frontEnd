@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './chips.component.scss',
 })
 export class ChipsComponent {
-  @Input() label: string = '';
+  @Input() label: string | null = '';
   @Input() color: string = '';
   @Input() icon: string = '';
   @Input() border: boolean = true;

@@ -33,3 +33,8 @@ export enum Role {
   ADMIN,
   SUPPORT,
 }
+
+export interface editarUsuario {
+  label: string;
+  value: string
+}

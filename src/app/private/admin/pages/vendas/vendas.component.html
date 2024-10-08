@@ -6,7 +6,14 @@
       <app-cadastrar-venda></app-cadastrar-venda>
     }
     @case ("listar-vendas") {
-
+      @switch (this.valueBehavior.labelComponent) {
+        @case ('app-listar-venda-por-id') {
+          <app-listar-venda-por-id [idVenda]="this.valueBehavior.idEntidade"></app-listar-venda-por-id>
+        }
+        @default {
+          <app-listar-vendas></app-listar-vendas>
+        }
+      }
     }
   }
 </main>

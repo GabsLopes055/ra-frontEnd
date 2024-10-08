@@ -1,0 +1,53 @@
+<main>
+  <div class="chips">
+    <div class="gbsChips">
+      <gbs-chips [label]="'Hoje'" [icon]="'calendar_month'" [active]="activeChip == null" (click)="alterarChip(null)"></gbs-chips>
+      <gbs-chips [label]="'7 dias'" [icon]="'calendar_month'" [active]="activeChip === '7'" (click)="alterarChip('7')"></gbs-chips>
+      <gbs-chips [label]="'15 Dias'" [icon]="'calendar_month'" [active]="activeChip === '15'" (click)="alterarChip('15')"></gbs-chips>
+      <gbs-chips [label]="'Ultimo Mês'" [icon]="'calendar_month'" [active]="activeChip === 'Ultimo Mês'" (click)="alterarChip('Ultimo Mês')"></gbs-chips>
+      <gbs-chips [label]="'Todas'" [icon]="'calendar_month'" [active]="activeChip === 'Todas'" (click)="alterarChip('Todas')"></gbs-chips>
+    </div>
+      <div class="escolherDatas">
+        <gbs-date [active]="activeChip === 'selecionarDatas'" (change)="retornarData($event)"></gbs-date>
+    </div>
+  </div>
+
+  @if (vendas.length > 0) {
+    <gbs-table [headers]="headers">
+      @for (row of vendas; track row) {
+        <tr>
+          <!-- <td>
+            <span>{{row.produtosVendidos?.length}}</span>
+          </td> -->
+          <td>
+            <span>{{row.dataVenda |  date : 'dd/MM/yyyy'}}</span>
+          </td>
+          <td>
+            <span>{{row.totalVenda | currency: 'BRL'}}</span>
+          </td>
+          <td>
+            <span>{{retornaMetodoDePagamento(row.metodoPagamento)}}</span>
+          </td>
+          <td>
+            <span>{{row.desconto | currency: 'BRL'}}</span>
+          </td>
+          <td class="butons">
+            <gbs-button [border]="false" [color]="'secundary'" [fieldButton]="'field'" [icon]="' production_quantity_limits '"
+            [size]="'small'" (click)="abrirComponentVendasPorId(row.idVenda)"></gbs-button>
+            <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'"
+            [size]="'small'"></gbs-button>
+            <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'delete'"
+            [size]="'small'"></gbs-button>
+          </td>
+        </tr>
+      }
+    </gbs-table>
+    <div class="paginator">
+      <gbs-paginator [totalPages]="totalPages" (change)="passarPaginas($event)"></gbs-paginator>
+    </div>
+  } @else {
+    <div class="vazio">
+      <img src="../../../../../../../assets/img/vazio.png" alt="" width="400" height="600">
+    </div>
+  }
+  </main>

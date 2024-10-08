@@ -29,7 +29,7 @@
 
       <td class="butons">
         <gbs-button [border]="false" [color]="'yellow'" [fieldButton]="'field'" [icon]="'edit'"
-          [size]="'small'"></gbs-button>
+          [size]="'small'" (click)="editarUsuario(row.userId)"></gbs-button>
         <gbs-button [border]="false" [color]="'primary'" [fieldButton]="'field'" [icon]="'person_off'"
           [size]="'small'" (click)="abrirModalDesativarUsuario(row.userId)"></gbs-button>
       </td>

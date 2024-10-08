@@ -7,6 +7,7 @@ import { ListComponent } from '../../../../../../../shared/table/list/list.compo
 import { TableComponent } from '../../../../../../../shared/table/table.component';
 import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import {
+  editarUsuario,
   FiltroUsuarioRequest,
   StatusUser,
   usuario,
@@ -54,7 +55,6 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
     role: null,
   };
 
-
   constructor(
     private readonly overlay: Overlay,
     private readonly usuarioService: UsuariosService,
@@ -86,6 +86,14 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
     this.listarUsuarios();
   }
 
+  editarUsuario(userId: string) {
+    let editarUsuario: editarUsuario = {
+      label: 'editar-usuario',
+      value: userId,
+    };
+    this.usuarioService.editarUsuario.next(editarUsuario);
+  }
+
   abrirModalDesativarUsuario(userId: string) {
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
@@ -103,7 +111,7 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
 
     const modal = modalConfirmacao.instance as ModalComponent;
 
-    modal.texto = "Deseja realmente desativar este usuario ?";
+    modal.texto = 'Deseja realmente desativar este usuario ?';
     // modal.subTexto = "Certifique-se de que não tenha nenhum produto vinculado a esta categoria !";
 
     modal.cancelar.subscribe(() => {
@@ -117,15 +125,15 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
   }
 
   desativarUsuario(userId: string) {
-
     this.usuarioService.desativarUsuario(userId).subscribe({
       next: (string) => {
         this.closeModal();
-        this.toastService.success("Sucesso", "Usuário desativado com sucesso !");
-      }
-    })
-
-
+        this.toastService.success(
+          'Sucesso',
+          'Usuário desativado com sucesso !'
+        );
+      },
+    });
   }
 
   closeModal() {
@@ -144,7 +152,10 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           console.log(error);
-          this.toastService.error('Erro interno !', 'Erro ao listar usuários !');
+          this.toastService.error(
+            'Erro interno !',
+            'Erro ao listar usuários !'
+          );
         },
       })
     );

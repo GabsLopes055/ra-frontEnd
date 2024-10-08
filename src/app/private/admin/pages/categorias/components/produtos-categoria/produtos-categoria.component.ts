@@ -4,11 +4,16 @@ import { categoriaComProdutos } from '../../../../../../interfaces/categoria.mod
 import { TableComponent } from '../../../../../../../shared/table/table.component';
 import { PaginatorComponent } from '../../../../../../../shared/paginator/paginator.component';
 import { ToastService } from '../../../../../../../shared/toast/toast.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-produtos-categoria',
   standalone: true,
-  imports: [TableComponent, PaginatorComponent],
+  imports: [
+    TableComponent,
+    PaginatorComponent,
+    CommonModule,
+  ],
   templateUrl: './produtos-categoria.component.html',
   styleUrl: './produtos-categoria.component.scss',
 })

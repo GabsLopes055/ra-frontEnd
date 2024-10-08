@@ -1,0 +1,66 @@
+.venda-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 24px;
+
+  .dataVenda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .icon {
+      display: flex;
+    flex-direction: row;
+    }
+  }
+
+  .descontoVenda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .icon {
+      display: flex;
+    flex-direction: row;
+    }
+  }
+}
+
+
+td {
+  padding: 24px;
+  text-align: left;
+  background-color: #F3F4F3;
+
+  &:first-child {
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+  }
+
+  &:last-child {
+    border-bottom-right-radius: 24px;
+    border-top-right-radius: 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    height: 100%;
+    justify-content: center;
+  }
+}
+
+.venda-footer {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 24px;
+
+  .pagamento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .icon {
+      display: flex;
+    flex-direction: row;
+    }
+  }
+}
