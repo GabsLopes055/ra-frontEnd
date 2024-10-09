@@ -1,11 +1,11 @@
 <main>
 <div class="categoria">
-  {{categoriaComProdutos.nomeCategoria}}
+  {{this.categoriaComProdutos.nomeCategoria}}
 </div>
 
-@if (categoriaComProdutos.produtoResponses.length > 0) {
+@if (produtos.length > 0) {
   <gbs-table [headers]="headers">
-    @for (row of categoriaComProdutos.produtoResponses; track row) {
+    @for (row of produtos; track row) {
       <tr>
         <td>
           <span>{{row.nomeProduto}}</span>

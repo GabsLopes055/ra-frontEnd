@@ -5,6 +5,7 @@ import { TableComponent } from '../../../../../../../shared/table/table.componen
 import { PaginatorComponent } from '../../../../../../../shared/paginator/paginator.component';
 import { ToastService } from '../../../../../../../shared/toast/toast.service';
 import { CommonModule } from '@angular/common';
+import { produtos } from '../../../../../../interfaces/produtos.model';
 
 @Component({
   selector: 'app-produtos-categoria',
@@ -19,7 +20,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ProdutosCategoriaComponent implements OnInit, OnDestroy {
 
-  categoriaComProdutos: any = [];
+  categoriaComProdutos!: categoriaComProdutos;
+  produtos: produtos[] = [];
   headers = ['Nome', 'Venda', 'Custo', 'Quantidade'];
   @Input() idCategoria: any;
 
@@ -42,6 +44,7 @@ export class ProdutosCategoriaComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           this.categoriaComProdutos = value;
+          this.produtos = value.produtoResponses;
         },
         error: (error) => {
           this.toastService.error("Erro Interno", "Erro ao listar produtos desta categoria");

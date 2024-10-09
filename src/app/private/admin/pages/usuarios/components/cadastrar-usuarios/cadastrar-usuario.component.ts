@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { InputComponent, optionsInput } from '../../../../../../../shared/input/input.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { ButtonComponent } from '../../../../../../../shared/button/button.component';
-import { ToastService } from '../../../../../../../shared/toast/toast.service';
-import { UsuariosService } from '../../usuarios.service';
+import { InputSelectComponent } from '../../../../../../../shared/input-select/input-select.component';
+import { InputComponent, optionsInput } from '../../../../../../../shared/input/input.component';
 import { usuarioRequest } from '../../../../../../interfaces/usuario.model';
-import { InputSelectComponent } from "../../../../../../../shared/input-select/input-select.component";
+import { UsuariosService } from '../../usuarios.service';
+import { ToastService } from './../../../../../../../shared/toast/toast.service';
 
 @Component({
   selector: 'app-cadastrar-usuarios',
@@ -58,7 +59,11 @@ export class CadastrarUsuarioComponent implements OnInit, OnDestroy {
         next: () => {
           this.toastService.success("Sucesso !", "Usuário cadastrado");
           this.formCadastrar.reset();
-        }
+        },
+        error(error) {
+          alert(error.error.mensagem)
+          // this.toastService.error(error.error.error, error.error.mensagem);
+        },
       })
     } else {
       this.toastService.warning('Atenção', 'Preencha o formulário corretamente !')

@@ -50,7 +50,6 @@ export class EditarUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioService.buscarUsuarioPorId(this.userId).subscribe({
       next: (value) => {
-        console.log(value)
         this.formEditar.controls.userId.setValue(value.userId);
         this.formEditar.controls.nomeCompleto.setValue(value.nomeCompleto);
         this.formEditar.controls.email.setValue(value.email);
@@ -58,7 +57,6 @@ export class EditarUsuarioComponent implements OnInit {
         this.formEditar.controls.permissao.setValue(value.permissao);
       },
       error: (error) => {
-        console.log()
         this.toastService.error(error.error.mensagem, error.error.error)
       },
     });
@@ -68,7 +66,10 @@ export class EditarUsuarioComponent implements OnInit {
     if(this.formEditar.valid) {
       this.usuarioService.editar(this.formEditar.value as usuario).subscribe({
         next: (value) => {
-          console.log(value)
+          this.toastService.success("Sucesso", "Usuário editado com Sucesso !")
+        },
+        error: (error) => {
+          console.log(error);
         }
       })
     }
