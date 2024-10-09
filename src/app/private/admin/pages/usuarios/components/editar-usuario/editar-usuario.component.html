@@ -1,9 +1,9 @@
 <main>
   <form action="" method="post">
-    <gbs-input [placeholder]="'Nome Completo'" [icon]="'person'" [control]="formEditar.controls.nomeCompleto" [type]="'text'"></gbs-input>
+      <gbs-input [placeholder]="'Nome Completo'" [icon]="'person'" [control]="formEditar.controls.nomeCompleto" [type]="'text'"></gbs-input>
       <gbs-input [placeholder]="'E-mail'" [icon]="'mail'" [control]="formEditar.controls.email"[type]="'text'"></gbs-input>
       <gbs-input [placeholder]="'Status Usuario'" [icon]="'lock_open_right'" [control]="formEditar.controls.statusUsuario"[type]="'select'" [options]="optionsStatus"></gbs-input>
-      <gbs-input [placeholder]="'Permissão'" [icon]="'fingerprint'" [control]="formEditar.controls.permissao"[type]="'select'" [options]="optionsPermissao"></gbs-input>
+      <gbs-input [placeholder]="'Permissão'" [icon]="'fingerprint'" [control]="formEditar.controls.permissao" [type]="'select'" [options]="optionsPermissao"></gbs-input>
   </form>
   <div class="actions">
     <gbs-button [disabled]="!this.formEditar.valid" [label]="'Cadastrar'" [color]="'secundary'" [icon]="'add'" (click)="editar()"></gbs-button>

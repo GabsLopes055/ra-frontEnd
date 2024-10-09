@@ -26,12 +26,16 @@ export class ProdutosService {
     return this.http.post<produtos>(`${URL}/produtos/salvarProduto`, produto)
   }
 
-  public excluirProduto(idProduto: string) : Observable<void> {
+  public excluirProduto(idProduto: string | null) : Observable<void> {
     return this.http.delete<void>(`${URL}/produtos/deletarProduto/${idProduto}`);
   }
 
   public buscarProdutoPorId(idProduto: string) : Observable<produtos> {
     return this.http.get<produtos>(`${URL}/produtos/buscarProdutoPorId/${idProduto}`);
+  }
+
+  editarProduto(idProduto : string, produto : produtos) : Observable<produtos> {
+    return this.http.put<produtos>(`${URL}/produtos/editarProduto/${idProduto}`, produto);
   }
 
 }

@@ -132,7 +132,7 @@ export class CadastrarVendaComponent implements OnInit, OnDestroy {
   }
 
   atualizarTotalVenda() {
-    this.totalVenda = this.produtosSelecionados.reduce((acumulador, produto) => acumulador + produto.precoVenda, 0);
+    this.totalVenda = this.produtosSelecionados.reduce((acumulador, produto) => acumulador + (produto.precoVenda || 0), 0);
     this.formVenda.controls.totalVenda.setValue(this.totalVenda);
 
     // Atualiza o valor com desconto aplicado

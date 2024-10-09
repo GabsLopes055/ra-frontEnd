@@ -16,7 +16,7 @@ export class InputSelectComponent {
 
   isOpen = false;
   isFocused!: boolean;
-  nomeProdutoSelecionado: string = '';
+  nomeProdutoSelecionado: string |null = '';
 
   @Input() type: string = 'text';
   @Input() icon!: string;

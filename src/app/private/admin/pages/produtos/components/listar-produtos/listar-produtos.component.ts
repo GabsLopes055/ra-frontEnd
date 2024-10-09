@@ -76,7 +76,7 @@ export class ListarProdutosComponent implements OnInit, OnDestroy {
     });
   }
 
-  abrirModalDeletarProduto(idProduto: string) {
+  abrirModalDeletarProduto(idProduto: string | null) {
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
       positionStrategy: this.overlay
@@ -105,7 +105,7 @@ export class ListarProdutosComponent implements OnInit, OnDestroy {
     });
   }
 
-  editarProduto(idProduto: string) {
+  editarProduto(idProduto: string | null) {
 
     this.passarValor = {
       idEntidade: idProduto,
@@ -116,7 +116,7 @@ export class ListarProdutosComponent implements OnInit, OnDestroy {
 
   }
 
-  excluirProduto(idProduto: string) {
+  excluirProduto(idProduto: string | null) {
     this.produtosService.excluirProduto(idProduto).subscribe({
       next: (value) => {
         this.toastService.success('Sucesso', 'Produto deletado !');
