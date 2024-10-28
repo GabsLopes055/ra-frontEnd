@@ -11,7 +11,7 @@ const URL = environment.base_url;
 })
 export class UsuariosService {
 
-  editarUsuario = new BehaviorSubject<editarUsuario | null>(null)
+  editarUsuario = new BehaviorSubject<editarUsuario | null>(null);
 
   constructor(private readonly http: HttpClient) { }
 

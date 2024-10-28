@@ -1,2 +1,40 @@
 <main>
+  <div class="esquerda">
+    <div class="cards">
+      <div class="card"><h6>Card 01</h6></div>
+      <div class="card"><h6>Card 02</h6></div>
+      <div class="card"><h6>Card 03</h6></div>
+    </div>
+
+    <div class="footer-esquerda">
+      <!-- <div class="cards-footer"> -->
+      <div class="card-footer">
+        <h6>Card 01 - Footer</h6>
+      </div>
+      <div class="card-footer">
+        <h6>Card 02 - Footer</h6>
+      </div>
+    </div>
+
+    <!-- </div> -->
+  </div>
+  <div class="direita">
+        @for (row of vendas; track row) {
+          <div class="linha-produto">
+            <span class="material-symbols-outlined">
+              work
+            </span>
+            @for (item of row.produtosVendidos; track $index) {
+              {{item.nomeProduto}}
+            }
+            {{row.metodoPagamento}}
+            {{row.totalVenda}}
+          </div>
+          <gbs-divider></gbs-divider>
+        } @empty {
+          <div class="vazio">
+            <img src="../../../../../../../assets/img/vazio.png" alt="" width="200" height="300">
+          </div>
+        }
+  </div>
 </main>

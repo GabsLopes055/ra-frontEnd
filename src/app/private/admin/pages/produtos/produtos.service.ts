@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filtroDeBuscaProduto, produtoRequest, produtos } from '../../../../interfaces/produtos.model';
 import { EntityPaginated } from '../../../../interfaces/paginated.model';
+import { valueBehavior } from '../../../../interfaces/valueBehavior.model';
 
 const URL = environment.base_url;
 
@@ -12,7 +13,7 @@ const URL = environment.base_url;
 })
 export class ProdutosService {
 
-  behaviorProduto = new BehaviorSubject<any>(null);
+  behaviorProduto = new BehaviorSubject<valueBehavior>({idEntidade: null, labelComponent: "app-produtos"});
 
   constructor(
     private readonly http: HttpClient
@@ -30,11 +31,11 @@ export class ProdutosService {
     return this.http.delete<void>(`${URL}/produtos/deletarProduto/${idProduto}`);
   }
 
-  public buscarProdutoPorId(idProduto: string) : Observable<produtos> {
+  public buscarProdutoPorId(idProduto: string | null) : Observable<produtos> {
     return this.http.get<produtos>(`${URL}/produtos/buscarProdutoPorId/${idProduto}`);
   }
 
-  editarProduto(idProduto : string, produto : produtos) : Observable<produtos> {
+  editarProduto(idProduto : string | null, produto : produtos) : Observable<produtos> {
     return this.http.put<produtos>(`${URL}/produtos/editarProduto/${idProduto}`, produto);
   }
 

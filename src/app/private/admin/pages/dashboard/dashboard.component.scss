@@ -1,10 +1,93 @@
-@import '../../.../../../../../assets/colors.scss';
+@import "../../.../../../../../assets/colors.scss";
 main {
   display: flex;
-  flex-direction: column;
-  // gap: 24px;
-  height: 80vh;
+  flex-direction: row;
+  gap: 24px;
+  height: 800px;
+  max-height: 100vh;
+  padding-bottom: 24px;
   margin: 0px 24px 0px 24px;
-  // padding: 24px;
-  // background-color: $color-gray-scale-60;
+
+  .esquerda {
+    width: 80%;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+
+    .cards {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      gap: 24px;
+      justify-content: space-between;
+
+      .card {
+        padding: 24px;
+        width: 100%;
+        height: 350px;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(0, 0, 0, 0.205);
+      }
+    }
+
+    .footer-esquerda {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      gap: 24px;
+
+      .card-footer {
+        border: 1px solid rgba(0, 0, 0, 0.205);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+      }
+    }
+  }
+
+  .direita {
+    width: 20%;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    // align-items: center;
+    // justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.205);
+
+    .linha-produto {
+      display: flex;
+      flex-direction: row;
+      height: auto;
+      width: 100%;
+      align-items: center;
+      gap: 24px;
+      span {
+        border-radius: 50%;
+        padding: 20px;
+        background-color: aliceblue;
+      }
+    }
+
+    .vazio {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+  }
 }

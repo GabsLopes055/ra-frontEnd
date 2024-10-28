@@ -19,8 +19,8 @@ export class ProdutosComponent {
 
   tabSelecionada: string = '';
 
-  mostrarComponent: string = '';
-  idProduto: string = '';
+  mostrarComponent: string | null = '';
+  idProduto: string | null = '';
 
   constructor(
     private readonly navbarService: NavbarService,
@@ -52,7 +52,7 @@ export class ProdutosComponent {
 
   retornarValorTab(event: any) {
     this.mostrarComponent = 'app-produtos';
-    this.produtoService.behaviorProduto.next(null);
+    // this.produtoService.behaviorProduto.next({idEntidade: null, labelComponent: null});
     this.tabSelecionada = event;
   }
 

@@ -66,7 +66,7 @@ export class EditarUsuarioComponent implements OnInit {
     if(this.formEditar.valid) {
       this.usuarioService.editar(this.formEditar.value as usuario).subscribe({
         next: (value) => {
-          this.toastService.success("Sucesso", "Usuário editado com Sucesso !")
+          this.toastService.success("Sucesso", "Usuário editado com Sucesso !");
         },
         error: (error) => {
           console.log(error);

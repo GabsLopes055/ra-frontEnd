@@ -15,7 +15,8 @@ export const guardRouterGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  toast.error("Erro Interno", "Por favor, refaça o login !")
+  toast.error("Erro Interno", "Por favor, refaça o login !");
+  console.log("aqui");
   router.navigate(['']);
   return false;
 };

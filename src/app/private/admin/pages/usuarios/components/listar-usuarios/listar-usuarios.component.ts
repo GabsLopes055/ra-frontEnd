@@ -159,7 +159,7 @@ export class ListarUsuariosComponent implements OnInit, OnDestroy {
         },
       })
     );
-  }
+  };
 
   retornarPermissao(role: string): string {
     switch (role) {

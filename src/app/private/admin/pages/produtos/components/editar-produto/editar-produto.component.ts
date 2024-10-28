@@ -17,6 +17,7 @@ import { CategoriasService } from '../../../categorias/categorias.service';
 import { ProdutosService } from '../../produtos.service';
 import { categoria } from './../../../../../../interfaces/categoria.model';
 import { produtos } from '../../../../../../interfaces/produtos.model';
+import { valueBehavior } from '../../../../../../interfaces/valueBehavior.model';
 
 @Component({
   selector: 'app-editar-produto',
@@ -29,7 +30,7 @@ export class EditarProdutoComponent implements OnInit, AfterViewInit {
   optionsCategorias: optionsInput[] = [];
   labelCategoria: optionsInput[] = [];
   categoria: categoria[] = [];
-  @Input() idProduto: string = '';
+  @Input() idProduto: string | null = '';
 
   formEditarProduto = new FormGroup({
     idProduto: new FormControl('', Validators.required),
@@ -99,6 +100,14 @@ export class EditarProdutoComponent implements OnInit, AfterViewInit {
 
       this.produtoService.editarProduto(this.idProduto, produto).subscribe({
         next: (produto) => {
+          console.log('passou aqui');
+
+          const passarvalor: valueBehavior = {
+            idEntidade: null,
+            labelComponent: 'app-produtos',
+          };
+
+          this.produtoService.behaviorProduto.next(passarvalor);
           this.toastService.success('Sucesso', 'Produto Editado !');
         },
         error: (error) => {
