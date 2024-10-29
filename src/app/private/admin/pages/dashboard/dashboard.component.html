@@ -20,15 +20,21 @@
   </div>
   <div class="direita">
         @for (row of vendas; track row) {
-          <div class="linha-produto">
-            <span class="material-symbols-outlined">
-              work
-            </span>
-            @for (item of row.produtosVendidos; track $index) {
-              {{item.nomeProduto}}
-            }
-            {{row.metodoPagamento}}
-            {{row.totalVenda}}
+          <div class="linha">
+            <div class="linha-produto">
+              <span class="material-symbols-outlined">
+                work
+              </span>
+              <div class="product">
+                @for (item of row.produtosVendidos; track $index) {
+                  <p>{{item.nomeProduto}}</p>
+                }
+              </div>
+            </div>
+            <div class="info">
+              <p>{{this.formaPagamento(row.metodoPagamento)}}</p>
+              <p class="p">{{row.totalVenda | currency: 'BRL'}}</p>
+            </div>
           </div>
           <gbs-divider></gbs-divider>
         } @empty {

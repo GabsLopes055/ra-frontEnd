@@ -9,22 +9,28 @@ import { Tab, TabsComponent } from '../../../../../shared/tabs/tabs.component';
 import { ToastrService } from 'ngx-toastr';
 import { filtroVenda, venda } from '../../../../interfaces/venda.model';
 import { VendasService } from '../vendas/vendas.service';
-import { DividerComponent } from "../../../../../shared/divider/divider.component";
+import { DividerComponent } from '../../../../../shared/divider/divider.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [TabsComponent, TableComponent, ListComponent, DividerComponent],
+  imports: [
+    TabsComponent,
+    TableComponent,
+    ListComponent,
+    DividerComponent,
+    CommonModule,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-
   vendas: venda[] = [];
 
   filtroBusca: filtroVenda = {
-    dataInicio: new Date(),
-    dataFim: new Date(),
+    dataInicio: new Date(new Date().setHours(0, 0, 0, 0)),
+    dataFim: new Date(new Date().setHours(0, 0, 0, 0)),
     pagina: 0,
     tamanhoPagina: 50,
   };
@@ -41,19 +47,28 @@ export class DashboardComponent implements OnInit {
       checked: true,
     });
     this.navbarService.setTitle('Dashboard');
-
   }
   ngOnInit(): void {
     this.listarVendasHoje();
   }
 
-
   listarVendasHoje() {
     this.vendasService.listarTodasAsVendas(this.filtroBusca).subscribe({
       next: (vendas) => {
-        console.log(vendas.content)
         this.vendas = vendas.content.flat();
-      }
-    })
+      },
+    });
+  }
+
+  formaPagamento(value: string | null): string {
+
+    const formasPagamento: { [key: string]: string } = {
+      CREDITO: "Crédito",
+      DEBITO: "Débito",
+      PIX: "Pix",
+      DINHEIRO: "Dinheiro"
+    };
+
+    return formasPagamento[value || ""];
   }
 }

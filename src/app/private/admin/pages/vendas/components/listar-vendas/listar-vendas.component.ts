@@ -65,6 +65,8 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.filtroBusca.dataInicio = new Date(new Date().setHours(0, 0, 0, 0));
+    this.filtroBusca.dataFim = new Date(new Date().setHours(0, 0, 0, 0));
     this.listarTodasVendas();
   }
   ngOnDestroy(): void {}
@@ -85,7 +87,8 @@ export class ListarVendasComponent implements OnInit, OnDestroy {
     this.activeChip = chip;
 
     if (chip === null) {
-      this.filtroBusca.dataInicio = new Date(this.dataInicio.toISOString());
+      this.filtroBusca.dataInicio = new Date(new Date().setHours(0, 0, 0, 0));
+      this.filtroBusca.dataFim = new Date(new Date().setHours(0, 0, 0, 0));
     } else if (chip === '7') {
       this.filtroBusca.dataInicio.setDate(this.dataInicio.getDate() - 7);
     } else if (chip === '15') {
