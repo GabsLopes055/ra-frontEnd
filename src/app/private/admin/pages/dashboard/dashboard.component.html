@@ -1,7 +1,18 @@
 <main>
   <div class="esquerda">
     <div class="cards">
-      <div class="card"><h6>Card 01</h6></div>
+      <div class="card-vendas">
+        <div class="venda">
+          {{dataHoje | date : "dd/MM/YYYY"}}
+          <h5>Total de Vendas realizadas Hoje</h5>
+          <span>{{total | currency : "R$: "}}</span>
+        </div>
+        <div class="quantidade-vendas">
+          {{dataHoje | date : "dd/MM/YYYY"}}
+          <h5>Quantidade de Vendas realizadas Hoje</h5>
+          <span>{{vendas.length}}</span>
+        </div>
+      </div>
       <div class="card"><h6>Card 02</h6></div>
       <div class="card"><h6>Card 03</h6></div>
     </div>
