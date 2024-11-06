@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 import { DividerComponent } from '../../../../../shared/divider/divider.component';
@@ -10,6 +10,7 @@ import { TableComponent } from '../../../../../shared/table/table.component';
 import { TabsComponent } from '../../../../../shared/tabs/tabs.component';
 import { filtroVenda, venda } from '../../../../interfaces/venda.model';
 import { VendasService } from '../vendas/vendas.service';
+import { Chart, registerables } from 'chart.js';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +26,11 @@ import { VendasService } from '../vendas/vendas.service';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
+
+  @ViewChild('graficoBar', { static: true }) graficoBar!: ElementRef;
+  @ViewChild('graficoLine', { static: true }) graficoLine!: ElementRef;
+  grafico: any;
+
   vendas: venda[] = [];
   total: any;
   dataHoje: any = new Date().toISOString();
@@ -50,9 +56,13 @@ export class DashboardComponent implements OnInit {
       checked: true,
     });
     this.navbarService.setTitle('Dashboard');
+    Chart.register(...registerables)
   }
+
   ngOnInit(): void {
     this.listarVendasHoje();
+    this.criarGraficoBar();
+    this.criarGraficoLine();
   }
 
   listarVendasHoje() {
@@ -76,5 +86,42 @@ export class DashboardComponent implements OnInit {
     };
 
     return formasPagamento[value || ''];
+  }
+
+  criarGraficoBar() {
+    new Chart(this.graficoBar.nativeElement.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['Dinheiro', 'PIX', 'Débito', 'Crédito', 'Débito', 'Débito', 'Crédito', 'Débito'],
+        datasets: [
+          {
+            data: [17, 23, 39, 42, 22, 41, 39, 42],
+            backgroundColor: ['#FF3131'],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+    });
+  }
+  criarGraficoLine() {
+    new Chart(this.graficoLine.nativeElement.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: ['Dinheiro', 'PIX', 'Débito', 'Crédito'],
+        datasets: [
+          {
+            data: [17, 23, 39, 42],
+            backgroundColor: ['#138182', '#770d7c', '#7f5410', '#822b0e'],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+    });
   }
 }

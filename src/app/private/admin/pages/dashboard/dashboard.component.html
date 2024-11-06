@@ -3,14 +3,14 @@
     <div class="cards">
       <div class="card-vendas">
         <div class="venda">
-          {{dataHoje | date : "dd/MM/YYYY"}}
+          {{ dataHoje | date : "dd/MM/YYYY" }}
           <h5>Total de Vendas realizadas Hoje</h5>
-          <span>{{total | currency : "R$: "}}</span>
+          <span>{{ total | currency : "R$: " }}</span>
         </div>
         <div class="quantidade-vendas">
-          {{dataHoje | date : "dd/MM/YYYY"}}
+          {{ dataHoje | date : "dd/MM/YYYY" }}
           <h5>Quantidade de Vendas realizadas Hoje</h5>
-          <span>{{vendas.length}}</span>
+          <span>{{ vendas.length }}</span>
         </div>
       </div>
       <div class="card"><h6>Card 02</h6></div>
@@ -20,38 +20,43 @@
     <div class="footer-esquerda">
       <!-- <div class="cards-footer"> -->
       <div class="card-footer">
-        <h6>Card 01 - Footer</h6>
+        <!-- <h6>Card 01 - Footer</h6> -->
+        <canvas #graficoLine></canvas>
+        <!-- <h6>aqui</h6> -->
       </div>
       <div class="card-footer">
-        <h6>Card 02 - Footer</h6>
+        <canvas #graficoBar></canvas>
       </div>
     </div>
 
     <!-- </div> -->
   </div>
   <div class="direita">
-        @for (row of vendas; track row) {
-          <div class="linha">
-            <div class="linha-produto">
-              <span class="material-symbols-outlined">
-                work
-              </span>
-              <div class="product">
-                @for (item of row.produtosVendidos; track $index) {
-                  <p>{{item.nomeProduto}}</p>
-                }
-              </div>
-            </div>
-            <div class="info">
-              <p>{{this.formaPagamento(row.metodoPagamento)}}</p>
-              <p class="p">{{row.totalVenda | currency: 'BRL'}}</p>
-            </div>
-          </div>
-          <gbs-divider></gbs-divider>
-        } @empty {
-          <div class="vazio">
-            <img src="../../../../../../../assets/img/vazio.png" alt="" width="200" height="300">
-          </div>
-        }
+    @for (row of vendas; track row) {
+    <div class="linha">
+      <div class="linha-produto">
+        <span class="material-symbols-outlined"> work </span>
+        <div class="product">
+          @for (item of row.produtosVendidos; track $index) {
+          <p>{{ item.nomeProduto }}</p>
+          }
+        </div>
+      </div>
+      <div class="info">
+        <p>{{ this.formaPagamento(row.metodoPagamento) }}</p>
+        <p class="p">{{ row.totalVenda | currency : "BRL" }}</p>
+      </div>
+    </div>
+    <gbs-divider></gbs-divider>
+    } @empty {
+    <div class="vazio">
+      <img
+        src="../../../../../../../assets/img/vazio.png"
+        alt=""
+        width="200"
+        height="300"
+      />
+    </div>
+    }
   </div>
 </main>
