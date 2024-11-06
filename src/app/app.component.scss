@@ -10,6 +10,7 @@ main {
     border-radius: 32px 0 0 32px;
     background-color: $color-brand-white;
     width: 100%;
+    overflow: auto;
   }
   // background-color: $color-black;
 }

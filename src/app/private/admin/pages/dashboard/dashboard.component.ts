@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit {
 
   criarGraficoBar() {
     new Chart(this.graficoBar.nativeElement.getContext('2d'), {
-      type: 'bar',
+      type: 'doughnut',
       data: {
         labels: ['Dinheiro', 'PIX', 'Débito', 'Crédito', 'Débito', 'Débito', 'Crédito', 'Débito'],
         datasets: [
@@ -103,6 +103,12 @@ export class DashboardComponent implements OnInit {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Grafico Pizza'
+          }
+        },
       },
     });
   }
@@ -113,15 +119,52 @@ export class DashboardComponent implements OnInit {
         labels: ['Dinheiro', 'PIX', 'Débito', 'Crédito'],
         datasets: [
           {
-            data: [17, 23, 39, 42],
-            backgroundColor: ['#138182', '#770d7c', '#7f5410', '#822b0e'],
+            label: 'Ano de 2023',
+            data: [27, 23, 39, 42],
+            borderColor: "#FFAC33",
+            backgroundColor: ['#FFAC33'],
+            yAxisID: 'y',
           },
+          {
+            label: ' Ano de 2024',
+            data: [33, 29, 23, 48],
+            borderColor: "#7f5410",
+            backgroundColor: ['#7f5410'],
+            yAxisID: 'y1',
+          }
         ],
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false,
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Grafico de Linha'
+          }
+        },
+        scales: {
+          y: {
+            type: 'linear',
+            display: true,
+            position: 'left',
+          },
+          y1: {
+            type: 'linear',
+            display: true,
+            position: 'right',
+
+            // grid line settings
+            grid: {
+              drawOnChartArea: false, // only want the grid lines for one axis to show up
+            },
+          },
+        }
       },
+
     });
   }
 }
