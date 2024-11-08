@@ -24,6 +24,9 @@ import { UserService } from '../../../shared/user/user.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit, OnDestroy {
+
+  errorLogin: boolean = false;
+
   formLogin = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
@@ -68,6 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           },
         });
     } else {
+      this.errorLogin = true;
       this.toast.warning(
         'Formulário incorreto',
         'Preencha o formulário corretamente !'

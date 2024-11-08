@@ -1,4 +1,4 @@
-<div class="input" [style.border-color]="control.value ? '#F44336' : '#000'">
+<div class="input" [style.border-color]="error ? '#F44336' : '#000'">
 
   @if (type === 'select') {
 
@@ -11,12 +11,15 @@
 
   } @else {
   <div class="input-wrapper">
-    <input [disabled]="disabled ? true : false" [type]="type" [formControl]="control" [placeholder]="isFocused ? placeholder : ''">
-    <label  [class.active]="isFocused || control.value">{{ placeholder }}</label>
+    <input [style.border-color]="error ? 'FF3131' : 'FF3131'" [disabled]="disabled ? true : false" [type]="type" [formControl]="control" [placeholder]="isFocused ? placeholder : ''">
+    <label  [class.active]="isFocused || control.value" [style.color]="error ? '#F44336' : ''">{{ placeholder }}</label>
   </div>
-  }
+}
 
-  <span class="material-symbols-outlined color-icon">
-    {{icon}}
-  </span>
+<span class="material-symbols-outlined color-icon" [style.color]="error ? '#F44336' : ''">
+  {{icon}}
+</span>
 </div>
+@if(error) {
+  <h6>Campo Obrigatorio</h6>
+}

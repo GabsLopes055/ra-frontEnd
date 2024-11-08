@@ -15,7 +15,7 @@
         <img src="../../../assets/img/RA-logo-removebg-preview.png" alt="">
       </div>
       <p><strong>Olá,</strong> Bem Vindo</p>
-      <gbs-input [placeholder]="'Username'" [icon]="'face'" [control]="formLogin.controls.email" [type]="'text'"></gbs-input>
+      <gbs-input [placeholder]="'Username'" [icon]="'face'" [error]="errorLogin" [control]="formLogin.controls.email" [type]="'text'"></gbs-input>
       <gbs-input [placeholder]="'Password'" [icon]="'key'" [control]="formLogin.controls.password"[type]="'password'"></gbs-input>
       <gbs-button [label]="'Entrar'" [color]="'secundary'"[fieldButton]="'field'" [icon]="'login'" (click)="login()" [disabled]="!formLogin.valid"></gbs-button>
     </div>

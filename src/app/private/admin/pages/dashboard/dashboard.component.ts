@@ -90,11 +90,12 @@ export class DashboardComponent implements OnInit {
 
   criarGraficoBar() {
     new Chart(this.graficoBar.nativeElement.getContext('2d'), {
-      type: 'doughnut',
+      type: 'bar',
       data: {
         labels: ['Dinheiro', 'PIX', 'Débito', 'Crédito', 'Débito', 'Débito', 'Crédito', 'Débito'],
         datasets: [
           {
+            label: "Vendas",
             data: [17, 23, 39, 42, 22, 41, 39, 42],
             backgroundColor: ['#FF3131'],
           },
@@ -102,13 +103,33 @@ export class DashboardComponent implements OnInit {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false,
+        },
         plugins: {
           title: {
             display: true,
             text: 'Grafico Pizza'
           }
         },
+        scales: {
+          y: {
+            type: 'linear',
+            display: true,
+            position: 'left',
+          },
+          y1: {
+            type: 'linear',
+            display: true,
+            position: 'right',
+
+            // grid line settings
+            grid: {
+              drawOnChartArea: false, // only want the grid lines for one axis to show up
+            },
+          },
+        }
       },
     });
   }
