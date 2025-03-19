@@ -1,29 +1,20 @@
-# Usa uma imagem do Node.js para a construção do projeto
-FROM node:20 AS builder
+# Usando a imagem oficial do Node.js como base
+FROM node:22
 
 # Define o diretório de trabalho
 WORKDIR /app
 
-# Copia os arquivos do projeto para dentro do contêiner
-COPY package.json package-lock.json ./
+# Copia o package.json e o package-lock.json
+COPY package*.json ./
 
 # Instala as dependências
-RUN npm install --legacy-peer-deps
+RUN npm install
 
-# Copia o restante do código para dentro do contêiner
+# Copia o restante da aplicação
 COPY . .
 
-# Compila o projeto Angular
-RUN npm run build -- --configuration=production
+# Expõe a porta 4200
+EXPOSE 4200
 
-# Usa uma imagem Nginx para servir a aplicação
-FROM nginx:alpine
-
-# Copia os arquivos gerados pelo build para o Nginx
-COPY --from=builder /app/dist/ra-front-end /usr/share/nginx/html
-
-# Expõe a porta 80 para acessar a aplicação
-EXPOSE 80
-
-# Comando padrão para iniciar o Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Comando para iniciar a aplicação Angular
+CMD ["npm", "start"]
